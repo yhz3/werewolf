@@ -1,0 +1,56 @@
+@startuml
+left to right direction
+'https://plantuml.com/class-diagram
+
+class ViewManager
+class NewGameView {
+    String viewName
+    - NewGameViewModel newGameViewModel
+    - JButton newGameButton
+    void propertyChange(PropertyChangeEvent evt)
+    void actionPerformed(ActionEvent e)
+}
+class NewGameController {
+    - NewGameInputBoundary newGameUseCaseInteractor
+    void execute(int numPlayers)
+}
+class NewGamePresenter {
+    prepareSuccessView()
+    prepareFailView(String error)
+}
+class NewGameInputData {
+    - int numPlayers
+    int getNumPlayers()
+}
+abstract class NewGameInputBoundary {
+    void execute(NewGameInputData newGameInputData)
+}
+class NewGameUseCaseInteractor {
+    - DataAccessObject dataAccessObject
+    void execute (int numPlayers)
+}
+entity numPlayers {
+    int numPlayers
+}
+abstract class NewGameOutputBoundary {
+    prepareSuccessView()
+    prepareFailView(String error)
+    firePropertyChanged()
+}
+class NewGameViewModel
+class NewGameDataAccessInterface {
+    void save()
+}
+
+NewGameUseCaseInteractor --|> NewGameInputBoundary
+NewGamePresenter --|> NewGameOutputBoundary
+NewGameController *-- NewGameInputData
+NewGameController *-- NewGameInputBoundary
+NewGamePresenter *-- NewGameViewModel
+NewGameView *-- NewGameViewModel
+NewGameUseCaseInteractor *-- NewGameInputData
+NewGameUseCaseInteractor *-- NewGameOutputBoundary
+NewGameUseCaseInteractor *-- NewGameOutputData
+NewGameUseCaseInteractor *-- NewGameDataAccessInterface
+NewGameUseCaseInteractor *-- numPlayers
+@enduml
