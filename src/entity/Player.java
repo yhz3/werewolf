@@ -31,11 +31,10 @@ public abstract class Player {
         return role;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+    public void setRole(String role) { this.role = role; }
 
-    void kill() {
+    public String kill() {
         this.alive = false;
+        return this.getName();
     }
 }
