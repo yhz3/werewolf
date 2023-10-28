@@ -11,18 +11,22 @@ USE CASE IDEAS:
   - Input Data: (n/a for now, but might be needed in future to adjust gpt story settings etc.), Game Object
   - Create PromptGenerator Object using constructor
   - Call PromptGenerator.generateIntroPrompt
-  - Feed Prompt to APIDataAccessInterface
+  - Feed Prompt to ChatAPIAccessInterface
+  - Save GPT Ouput to PromptGenerator
   - Output Data: GPT Output, Game Object, PromptGeneratorObject
 - Kill player (in night)
   - Input Data: Player name, Game Object, PromptGeneratorObject
   - Call PromptGenerator.generatePlayerKilledPrompt
-  - Feed Prompt to APIDataAccessInterface, PromptGeneratorObject
+  - Feed Prompt to ChatAPIAccessInterface
+  - Save GPT Output to PromptGenerator
   - Check for win condition
   - Change Game.day to true
   - Output Data: GPT Output, Game Object, PromptGeneratorObject
 - Vote out player (in day)
-  - Input Data: Player name, Game Object
+  - Input Data: Player name, Game Object, PromptGeneratorObject
   - Call PromptGenerator.generatePlayerVotedOutPrompt
+  - Feed Prompt to ChatAPIAccessInterface
+  - Save GPT Output to PromptGenerator
   - Check for win condition
   - Change Game.day to false
   - Output Data: GPT Output, Game Object, PromptGeneratorObject
