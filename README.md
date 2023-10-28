@@ -1,5 +1,14 @@
 Project Specification for Group #167
 
+USE CASE IDEAS:
+- new game
+- enter player names
+- assign player roles
+- kill player (in night)
+- vote out player (in day)
+- view player roles during game (less important)
+
+
 Team Name: Los Pollos Hermanos
 Domain: Werewolf Game with AI Narrator
 The application will allow people to play a game of Werewolf/Mafia offline. On top of a functional interface for playing Werewolf on one computer, This interface will assist the typical narrator role in the Mafia game. It will take user input and game state data to give prompts to Chat-GPT to narrate the story.
