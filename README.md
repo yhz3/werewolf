@@ -1,5 +1,37 @@
 Project Specification for Group #167
 
+USE CASE IDEAS:
+- New game
+  - Input Data: Player names
+  - Create Player Entities (Assign Roles Randomly)
+  - Create Game Object
+  - Add Players to Game
+  - Output Data: Game Object
+- Begin Intro
+  - Input Data: (n/a for now, but might be needed in future to adjust gpt story settings etc.), Game Object
+  - Create PromptGenerator Object using constructor
+  - Call PromptGenerator.generateIntroPrompt
+  - Feed Prompt to ChatAPIAccessInterface
+  - Save GPT Ouput to PromptGenerator
+  - Output Data: GPT Output, Game Object, PromptGeneratorObject
+- Kill player (in night)
+  - Input Data: Player name, Game Object, PromptGeneratorObject
+  - Call PromptGenerator.generatePlayerKilledPrompt
+  - Feed Prompt to ChatAPIAccessInterface
+  - Save GPT Output to PromptGenerator
+  - Check for win condition
+  - Change Game.day to true
+  - Output Data: GPT Output, Game Object, PromptGeneratorObject
+- Vote out player (in day)
+  - Input Data: Player name, Game Object, PromptGeneratorObject
+  - Call PromptGenerator.generatePlayerVotedOutPrompt
+  - Feed Prompt to ChatAPIAccessInterface
+  - Save GPT Output to PromptGenerator
+  - Check for win condition
+  - Change Game.day to false
+  - Output Data: GPT Output, Game Object, PromptGeneratorObject
+
+
 Team Name: Los Pollos Hermanos
 Domain: Werewolf Game with AI Narrator
 The application will allow people to play a game of Werewolf/Mafia offline. On top of a functional interface for playing Werewolf on one computer, This interface will assist the typical narrator role in the Mafia game. It will take user input and game state data to give prompts to Chat-GPT to narrate the story.
