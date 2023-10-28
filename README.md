@@ -1,7 +1,7 @@
 Project Specification for Group #167
 
 USE CASE IDEAS:
-- Start game
+- New game
   - Input Data: Player names
   - Create Player Entities (Assign Roles Randomly)
   - Create Game Object
