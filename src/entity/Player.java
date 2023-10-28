@@ -34,8 +34,4 @@ public abstract class Player {
     public void setRole(String role) {
         this.role = role;
     }
-
-    void kill() {
-        this.alive = false;
-    }
 }
