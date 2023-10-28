@@ -1,12 +1,29 @@
 Project Specification for Group #167
 
 USE CASE IDEAS:
-- new game
-- enter player names
-- assign player roles
-- kill player (in night)
-- vote out player (in day)
-- view player roles during game (less important)
+- Start game
+  - Input Data: Player names
+  - Create Player Entities (Assign Roles Randomly)
+  - Create Game Object
+  - Add Players to Game
+  - Output Data: Game Object
+- Begin Intro
+  - Input Data: (n/a for now, but might be needed in future to adjust gpt story settings etc.), Game Object
+  - Create PromptGenerator Object using constructor
+  - Call PromptGenerator.generateIntroPrompt
+  - Feed Prompt to APIDataAccessInterface
+  - Output Data: GPT Output, Game Object, PromptGeneratorObject
+- Kill player (in night)
+  - Input Data: Player name, Game Object, PromptGeneratorObject
+  - Call PromptGenerator.generatePlayerKilledPrompt
+  - Feed Prompt to APIDataAccessInterface, PromptGeneratorObject
+  - Check for win condition 
+  - Output Data: GPT Output, Game Object, PromptGeneratorObject
+- Vote out player (in day)
+  - Input Data: Player name, Game Object
+  - Call PromptGenerator.generatePlayerVotedOutPrompt
+  - Check for win condition
+  - Output Data: GPT Output, Game Object, PromptGeneratorObject
 
 
 Team Name: Los Pollos Hermanos
