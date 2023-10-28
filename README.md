@@ -17,12 +17,14 @@ USE CASE IDEAS:
   - Input Data: Player name, Game Object, PromptGeneratorObject
   - Call PromptGenerator.generatePlayerKilledPrompt
   - Feed Prompt to APIDataAccessInterface, PromptGeneratorObject
-  - Check for win condition 
+  - Check for win condition
+  - Change Game.day to true
   - Output Data: GPT Output, Game Object, PromptGeneratorObject
 - Vote out player (in day)
   - Input Data: Player name, Game Object
   - Call PromptGenerator.generatePlayerVotedOutPrompt
   - Check for win condition
+  - Change Game.day to false
   - Output Data: GPT Output, Game Object, PromptGeneratorObject
 
 
