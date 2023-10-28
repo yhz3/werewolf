@@ -10,7 +10,6 @@ public class Game {
     private HashMap<String, Player> aliveWerewolves;
     private HashMap<String, Player> deadWerewolves;
     private boolean day;
-    private boolean gameOver;
 
     public Game(){
         this.aliveVillagers = new HashMap<String, Player>();
@@ -18,7 +17,6 @@ public class Game {
         this.aliveWerewolves = new HashMap<String, Player>();
         this.deadWerewolves = new HashMap<String, Player>();
         this.day = false;
-        this.gameOver = false;
     }
 
     public HashMap<String, Player> getAliveVillagers(){
@@ -51,10 +49,6 @@ public class Game {
         return day;
     }
 
-    public boolean getGameOver(){
-        return gameOver;
-    }
-
     public void changeGameState(){
         day = !day;
     }
@@ -71,14 +65,7 @@ public class Game {
         }
     }
 
-    public void checkGameOver(){
-        if (aliveVillagers.isEmpty() || aliveWerewolves.isEmpty()){
-            gameOver = true;
-            endGame();
-        }
+    public boolean checkGameOver(){
+        return aliveVillagers.isEmpty() || aliveWerewolves.isEmpty();
     }
-
-    public void endGame(){}
-
-
 }
