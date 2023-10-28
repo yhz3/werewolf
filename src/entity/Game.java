@@ -17,7 +17,7 @@ public class Game {
         this.deadVillagers = new HashMap<String, Player>();
         this.aliveWerewolves = new HashMap<String, Player>();
         this.deadWerewolves = new HashMap<String, Player>();
-        this.day = true;
+        this.day = false;
         this.gameOver = false;
     }
 
@@ -47,7 +47,7 @@ public class Game {
         }
     }
 
-    public boolean getGameState(){
+    public boolean isDay(){
         return day;
     }
 
