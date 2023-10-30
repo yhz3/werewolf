@@ -116,3 +116,19 @@ Scheduled Meeting Times + Mode of Communication:
 - Meeting time outside of lab: Saturdays 3:00pm
 - Mode of Communication: Discord server
 
+Dev Workflow:
+
+Issues (Tasks)
+- i.e. adding a use case
+- describe plan
+
+Pull Request
+- talk about literal code
+- technical plan
+  - files to be edited
+  - concerns 
+  - limitations
+
+Code
+- ensure codebase still runs between commits
+
