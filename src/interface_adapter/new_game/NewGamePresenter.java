@@ -1,4 +1,6 @@
 package interface_adapter.new_game;
 
-public class NewGamePresenter {
+import use_case.new_game.NewGameOutputBoundary;
+
+public class NewGamePresenter implements NewGameOutputBoundary {
 }
