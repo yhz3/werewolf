@@ -3,7 +3,7 @@ package entity;
 import java.util.ArrayList;
 
 public class ConversationHistory {
-    ArrayList<String> history;
+    private final ArrayList<String> history;
 
     public ConversationHistory() {
         this.history = new ArrayList<String>();

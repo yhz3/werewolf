@@ -1,2 +1,5 @@
-package use_case.begin_intro;public class BeginIntroInputBoundary {
+package use_case.begin_intro;
+
+public interface BeginIntroInputBoundary {
+    void execute(BeginIntroInputData beginIntroInputData);
 }

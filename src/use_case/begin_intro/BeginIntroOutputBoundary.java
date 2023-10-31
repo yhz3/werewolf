@@ -1,2 +1,5 @@
-package use_case.begin_intro;public class BeginIntroOutputBoundary {
+package use_case.begin_intro;
+
+public interface BeginIntroOutputBoundary {
+    void prepareSuccessView(BeginIntroOutputData response);
 }

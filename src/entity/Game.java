@@ -11,7 +11,7 @@ public class Game {
     private final HashMap<String, Player> deadWerewolves;
     private boolean day;
 
-    public Game(){
+    public Game() {
         this.aliveVillagers = new HashMap<String, Player>();
         this.deadVillagers = new HashMap<String, Player>();
         this.aliveWerewolves = new HashMap<String, Player>();
@@ -19,42 +19,42 @@ public class Game {
         this.day = false;
     }
 
-    public HashMap<String, Player> getAliveVillagers(){
+    public HashMap<String, Player> getAliveVillagers() {
         return aliveVillagers;
     }
 
-    public HashMap<String, Player> getDeadVillagers(){
+    public HashMap<String, Player> getDeadVillagers() {
         return deadVillagers;
     }
 
-    public HashMap<String, Player> getAliveWerewolves(){
+    public HashMap<String, Player> getAliveWerewolves() {
         return aliveWerewolves;
     }
 
-    public HashMap<String, Player> getDeadWerewolves(){
+    public HashMap<String, Player> getDeadWerewolves() {
         return deadWerewolves;
     }
 
-    public void addPlayer(Player player){
+    public void addPlayer(Player player) {
         String name = player.getName();
         String role = player.getRole();
-        if (role.equals("werewolf")){
+        if (role.equals("werewolf")) {
             aliveWerewolves.put(name, player);
         } else {
             aliveVillagers.put(name, player);
         }
     }
 
-    public boolean isDay(){
+    public boolean isDay() {
         return day;
     }
 
-    public void changeGameState(){
+    public void changeGameState() {
         day = !day;
     }
 
-    public void killPlayer(String name){
-        if (aliveVillagers.containsKey(name)){
+    public void killPlayer(String name) {
+        if (aliveVillagers.containsKey(name)) {
             Player Villager = aliveVillagers.get(name);
             Villager.setAlive(false);
             aliveVillagers.remove(name);
@@ -67,11 +67,19 @@ public class Game {
         }
     }
 
-    public boolean checkGameOver(){
+    public boolean checkGameOver() {
         return aliveVillagers.isEmpty() || aliveWerewolves.isEmpty();
     }
 
-    public boolean checkVillagerWin(){
+    public boolean checkVillagerWin() {
         return aliveVillagers.isEmpty();
+    }
+
+    public String[] getVillagerNames() {
+        return this.aliveVillagers.keySet().toArray(new String[0]);
+    }
+
+    public String[] getWerewolfNames() {
+        return this.aliveWerewolves.keySet().toArray(new String[0]);
     }
 }
