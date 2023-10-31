@@ -3,9 +3,9 @@ package entity;
 import java.util.Arrays;
 
 public class PromptGenerator {
-    ConversationHistory conversationHistory;
-    String[] players;
-    String[] werewolves;
+    public final ConversationHistory conversationHistory;
+    private final String[] players;
+    private final String[] werewolves;
 
     public PromptGenerator(String[] players, String[] werewolves) {
         this.players = players;
