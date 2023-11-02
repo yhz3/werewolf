@@ -12,7 +12,7 @@ public class KillVillagerInteractor implements KillVillagerInputBoundary{
     // history.
     final Game game;
     // Originally put it as a parameter for killVillager, but it seems to make more sense to put it here since the
-    // KillVillagerOutputBoundary should only be handling one Game entity at a time anyways.
+    // KillVillagerOutputBoundary should only be handling one Game entity at a time.
 
     public KillVillagerInteractor(KillVillagerOutputBoundary killPresenter, PromptGenerator gpt, Game game) {
         this.killPresenter = killPresenter;
@@ -24,6 +24,8 @@ public class KillVillagerInteractor implements KillVillagerInputBoundary{
     public void killVillager(String villager) {
         if (game.getAliveVillagers().containsKey(villager)) {
             game.killPlayer(villager);
+            // Here I am assuming that the game entity will properly update the aliveVillagers hashmap and properly
+            // update the deadVillagers hashmap
             game.changeGameState();
             String villagerDeathStory = gpt.generatePlayerKilledPrompt(villager);
             killPresenter.prepareSuccessView(villagerDeathStory);
