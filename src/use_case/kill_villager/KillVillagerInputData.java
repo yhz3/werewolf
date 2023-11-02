@@ -1,2 +1,5 @@
-package use_case.kill_villager;public class KillVillagerInputData {
+package use_case.kill_villager;
+
+public class KillVillagerInputData {
 }
+
