@@ -9,9 +9,9 @@ public class VoteOutController {
         this.userVoteOutUseCaseInteractor = userVoteOutUseCaseInteractor;
     }
 
-    public void execute(String votedName) {
+    public void voteOutPlayer(String votedName) {
         VoteOutInputData voteOutInputData = new VoteOutInputData(votedName);
 
-        userVoteOutUseCaseInteractor.execute(voteOutInputData);
+        userVoteOutUseCaseInteractor.voteOutPlayer(voteOutInputData);
     }
 }
