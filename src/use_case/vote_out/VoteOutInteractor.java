@@ -14,8 +14,9 @@ public class VoteOutInteractor implements VoteOutInputBoundary {
     }
 
     // This method returns true if a werewolf is voted out and returns false otherwise
+    // Thus, it is false if a villager is voted out OR if an invalid name is entered
     @Override
-    public boolean execute(VoteOutInputData voteOutInputData) {
+    public boolean voteOutPlayer(VoteOutInputData voteOutInputData) {
         boolean werewolfVotedOut = false;
         String votedName = voteOutInputData.getVotedName();
         if (this.game.getAliveWerewolves().containsKey(votedName)){
@@ -29,7 +30,10 @@ public class VoteOutInteractor implements VoteOutInputBoundary {
         // kill player
         userPresenter.prepareSuccessView();
         userDataAccessObject.save(game);
+        // Kill that Player
         this.game.killPlayer(votedName);
+        // Switch to night TODO: figure out how the hell this works (should my use case even do this)
+        this.game.changeGameState();
         return werewolfVotedOut;
     }
 }

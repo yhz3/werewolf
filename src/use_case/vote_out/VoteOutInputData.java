@@ -1,8 +1,5 @@
 package use_case.vote_out;
 
-import entity.Game;
-import entity.Player;
-
 public class VoteOutInputData {
     private String votedName;
 
@@ -14,6 +11,7 @@ public class VoteOutInputData {
         return votedName;
     }
 
+    // TODO: re-evaluate if we need the setter
     public void setVotedName(String votedName) {
         this.votedName = votedName;
     }
