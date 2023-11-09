@@ -1,7 +1,7 @@
 package use_case.vote_out;
 
 public interface VoteOutOutputBoundary {
-    void prepareFailView();
+    void prepareFailView(String error);
 
-    void prepareSuccessView();
+    void prepareSuccessView(VoteOutOutputData playerData);
 }
