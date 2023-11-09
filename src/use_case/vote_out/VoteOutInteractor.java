@@ -8,13 +8,11 @@ public class VoteOutInteractor implements VoteOutInputBoundary {
     final VoteOutDataAccessInterface gameDataAccessObject;
     final ChatAPIAccessInterface storyDataAccessObject;
     final VoteOutOutputBoundary userPresenter;
-    final PromptGenerator promptGenerator;
 
-    public VoteOutInteractor(VoteOutDataAccessInterface gameDataAccessObject, ChatAPIAccessInterface storyDataAccessObject, VoteOutOutputBoundary userPresenter, PromptGenerator promptGenerator) {
+    public VoteOutInteractor(VoteOutDataAccessInterface gameDataAccessObject, ChatAPIAccessInterface storyDataAccessObject, VoteOutOutputBoundary userPresenter) {
         this.gameDataAccessObject = gameDataAccessObject;
         this.storyDataAccessObject = storyDataAccessObject;
         this.userPresenter = userPresenter;
-        this.promptGenerator = promptGenerator;
     }
 
     // This method prepares success view if a werewolf or villager is voted out
@@ -39,6 +37,8 @@ public class VoteOutInteractor implements VoteOutInputBoundary {
             else if (game.getAliveWerewolves().containsKey(playerVotedOut)) {
                 playerRole = "werewolf";
             }
+            // Get the prompt generator
+            PromptGenerator promptGenerator = gameDataAccessObject.getPromptGenerator();
             // Get the story
             String prompt = promptGenerator.generatePlayerVotedOutPrompt(playerVotedOut, playerRole);
             String story = storyDataAccessObject.getResponse(prompt);

@@ -1,6 +1,7 @@
 package data_access;
 
 import entity.Game;
+import entity.PromptGenerator;
 import use_case.vote_out.VoteOutDataAccessInterface;
 
 import java.io.BufferedReader;
@@ -19,6 +20,8 @@ public class GameDataAccessObject implements VoteOutDataAccessInterface {
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     // Game entity which we'll build from csv file
     private Game game;
+    // PromptGenerator entity which we'll build from csv flie
+    private PromptGenerator promptGenerator;
 
     public GameDataAccessObject(String csvPath) throws IOException {
         this.csvFile = new File(csvPath);
@@ -47,5 +50,7 @@ public class GameDataAccessObject implements VoteOutDataAccessInterface {
     public Game getGame() {
         return game;
     }
+
+    public PromptGenerator getPromptGenerator() { return promptGenerator; }
 
 }
