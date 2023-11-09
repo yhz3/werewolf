@@ -1,5 +1,5 @@
 package use_case.vote_out;
 
 public interface VoteOutInputBoundary {
-    boolean voteOutPlayer(VoteOutInputData voteOutInputData);
+    void voteOutPlayer(VoteOutInputData voteOutInputData);
 }

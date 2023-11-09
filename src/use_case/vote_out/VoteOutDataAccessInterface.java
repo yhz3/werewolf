@@ -4,4 +4,5 @@ import entity.Game;
 
 public interface VoteOutDataAccessInterface {
     void save(Game game);
+    Game getGame();
 }

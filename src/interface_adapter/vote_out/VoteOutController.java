@@ -5,6 +5,7 @@ import use_case.vote_out.VoteOutInputData;
 
 public class VoteOutController {
     final VoteOutInputBoundary userVoteOutUseCaseInteractor;
+
     public VoteOutController(VoteOutInputBoundary userVoteOutUseCaseInteractor) {
         this.userVoteOutUseCaseInteractor = userVoteOutUseCaseInteractor;
     }
