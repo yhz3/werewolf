@@ -7,6 +7,7 @@ public class VoteOutController {
     final VoteOutInputBoundary userVoteOutUseCaseInteractor;
 
     public VoteOutController(VoteOutInputBoundary userVoteOutUseCaseInteractor) {
+        // TODO: check if the input boundary should be passed in as a parameter later (they did that in week5ca)
         this.userVoteOutUseCaseInteractor = userVoteOutUseCaseInteractor;
     }
 
