@@ -46,8 +46,10 @@ public class KillVillagerInteractor implements KillVillagerInputBoundary{
         if (game.getAliveVillagers().containsKey(villager)) {
             // Get the story
             String villagerDeathPrompt = promptGenerator.generatePlayerKilledPrompt(villager);
+            // Once prompt is generated, the prompt is automatically saved by promptGenerator into ConversationHistory.
             String villagerDeathStory = gptDataAccessObject.getResponse(villagerDeathPrompt);
-
+            promptGenerator.getConversationHistory().addGPTMessage(villagerDeathStory);
+            // Saves the villagerDeathStory to the conversationHistory.
             // Kill villager
             game.killPlayer(villager);
             // Here I am assuming that the game entity will properly update the aliveVillagers hashmap and properly
@@ -55,6 +57,8 @@ public class KillVillagerInteractor implements KillVillagerInputBoundary{
             // Switch to day
             game.changeGameState();
             gameDataAccessObject.save(game);
+            conversationDataAccessObject.save(promptGenerator);
+            // Saves both the game and the conversation history.
             KillVillagerOutputData killVillagerOutputData = new KillVillagerOutputData(villagerDeathStory);
             killVillagerPresenter.prepareSuccessView(killVillagerOutputData);
             // If we follow Daniyaal's implementation, then we would also pass the name along as output data in case
