@@ -1,10 +1,10 @@
 package use_case.vote_out;
 
 public class VoteOutOutputData {
-    String playerVotedOut;
+    private String playerVotedOut;
 
-    String playerRole;
-    String story;
+    private String playerRole;
+    private String story;
 
     public VoteOutOutputData(String playerVotedOut, String playerRole, String story) {
         this.playerVotedOut = playerVotedOut;
