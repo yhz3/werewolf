@@ -2,6 +2,8 @@ package data_access;
 
 import entity.Game;
 import entity.PromptGenerator;
+import use_case.GameAccessInterface;
+import use_case.PromptAccessInterface;
 import use_case.vote_out.VoteOutDataAccessInterface;
 
 import java.io.BufferedReader;
@@ -12,7 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 // TODO: this class must implement all data access interfaces we create going forward
-public class GameDataAccessObject implements VoteOutDataAccessInterface {
+public class GameDataAccessObject implements GameAccessInterface, PromptAccessInterface {
 
     // This is the csv file
     private final File csvFile;
@@ -28,7 +30,8 @@ public class GameDataAccessObject implements VoteOutDataAccessInterface {
         // TODO: We create the headers around here
 
         if (csvFile.length() == 0) {
-            save(game);
+            saveGame(game);
+            savePromptGenerator(promptGenerator);
         } else {
 
             try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
@@ -36,14 +39,19 @@ public class GameDataAccessObject implements VoteOutDataAccessInterface {
 
                 String row;
                 while ((row = reader.readLine()) != null) {
-                    // TODO: Decide how we'll read in the game
+                    // TODO: Decide how we'll read in the game and promptGenerator
                 }
             }
         }
     }
 
     @Override
-    public void save(Game game) {
+    public void saveGame(Game game) {
+
+    }
+
+    @Override
+    public void savePromptGenerator(PromptGenerator promptGenerator) {
 
     }
 
@@ -52,5 +60,6 @@ public class GameDataAccessObject implements VoteOutDataAccessInterface {
     }
 
     public PromptGenerator getPromptGenerator() { return promptGenerator; }
+
 
 }
