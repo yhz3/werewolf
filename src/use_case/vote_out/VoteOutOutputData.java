@@ -1,8 +1,9 @@
 package use_case.vote_out;
 
 public class VoteOutOutputData {
+    // playerVotedOut and playerRole are here in case we use them in future views
+    // Can take them out later if we don't end up using them
     private String playerVotedOut;
-
     private String playerRole;
     private String story;
 
