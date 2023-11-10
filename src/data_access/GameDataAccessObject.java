@@ -3,7 +3,6 @@ package data_access;
 import entity.Game;
 import entity.PromptGenerator;
 import use_case.data_access_interface.GameDataAccessInterface;
-import use_case.data_access_interface.PromptDataAccessInterface;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,7 +12,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 // TODO: this class must implement all data access interfaces we create going forward
-public class DataAccessObject implements GameDataAccessInterface, PromptDataAccessInterface {
+public class GameDataAccessObject implements GameDataAccessInterface {
 
     // This is the csv file
     private final File csvFile;
@@ -21,10 +20,8 @@ public class DataAccessObject implements GameDataAccessInterface, PromptDataAcce
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     // Game entity which we'll build from csv file
     private Game game;
-    // PromptGenerator entity which we'll build from csv flie
-    private PromptGenerator promptGenerator;
 
-    public DataAccessObject(String csvPath) throws IOException {
+    public GameDataAccessObject(String csvPath) throws IOException {
         this.csvFile = new File(csvPath);
         // TODO: We create the headers around here
 
@@ -52,11 +49,5 @@ public class DataAccessObject implements GameDataAccessInterface, PromptDataAcce
         return game;
     }
 
-    public PromptGenerator getPromptGenerator() { return promptGenerator; }
-
-    @Override
-    public void save(PromptGenerator promptGenerator) {
-
-    }
 
 }
