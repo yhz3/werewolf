@@ -35,16 +35,16 @@ public class BeginIntroInteractor implements BeginIntroInputBoundary {
     @Override
     public void execute(BeginIntroInputData beginIntroInputData) {
         String prompt = this.promptGenerator.generateIntroPrompt(this.game.getVillagerNames(), this.game.getWerewolfNames());
-        String GPTMessage = this.gptDataAccessObject.getResponse(prompt);
+        String introStory = this.gptDataAccessObject.getResponse(prompt);
 
         // Keep track of the ChatGPT response. User prompt is automatically stored when generating prompt.
-        this.promptGenerator.getConversationHistory().addGPTMessage(GPTMessage);
+        this.promptGenerator.getConversationHistory().addGPTMessage(introStory);
 
         // Save Game and PromptGenerator Data
         this.gameDataAccessObject.save(this.game);
         this.conversationDataAccessObject.save(this.promptGenerator);
 
-        BeginIntroOutputData response = new BeginIntroOutputData(GPTMessage);
+        BeginIntroOutputData response = new BeginIntroOutputData(introStory);
         this.beginIntroPresenter.prepareSuccessView(response);
     }
 }
