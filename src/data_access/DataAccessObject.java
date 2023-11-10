@@ -2,8 +2,8 @@ package data_access;
 
 import entity.Game;
 import entity.PromptGenerator;
-import use_case.data_access.PromptGameDataAccessInterface;
-import use_case.vote_out.VoteOutDataAccessInterface;
+import use_case.data_access_interface.GameDataAccessInterface;
+import use_case.data_access_interface.PromptDataAccessInterface;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,7 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 // TODO: this class must implement all data access interfaces we create going forward
-public class GameDataAccessObject implements PromptGameDataAccessInterface {
+public class DataAccessObject implements GameDataAccessInterface, PromptDataAccessInterface {
 
     // This is the csv file
     private final File csvFile;
@@ -24,7 +24,7 @@ public class GameDataAccessObject implements PromptGameDataAccessInterface {
     // PromptGenerator entity which we'll build from csv flie
     private PromptGenerator promptGenerator;
 
-    public GameDataAccessObject(String csvPath) throws IOException {
+    public DataAccessObject(String csvPath) throws IOException {
         this.csvFile = new File(csvPath);
         // TODO: We create the headers around here
 
