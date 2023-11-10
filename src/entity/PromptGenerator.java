@@ -3,7 +3,7 @@ package entity;
 import java.util.Arrays;
 
 public class PromptGenerator {
-    ConversationHistory conversationHistory;
+    private final ConversationHistory conversationHistory;
     public PromptGenerator(ConversationHistory conversationHistory) {
         this.conversationHistory = conversationHistory;
         // Conversation history needs to be passed in as an argument since for each use case, we need to pull data
@@ -42,4 +42,9 @@ public class PromptGenerator {
         conversationHistory.addUserMessage(prompt);
         return prompt;
     }
+
+    public ConversationHistory getConversationHistory() {
+        return conversationHistory;
+    }
+
 }
