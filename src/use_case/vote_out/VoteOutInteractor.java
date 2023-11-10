@@ -2,24 +2,28 @@ package use_case.vote_out;
 
 import entity.Game;
 import entity.PromptGenerator;
-import use_case.ChatAPIAccessInterface;
+import use_case.data_access_interface.ChatAPIAccessInterface;
+import use_case.data_access_interface.GameDataAccessInterface;
+import use_case.data_access_interface.ConversationDataAccessInterface;
 
 public class VoteOutInteractor implements VoteOutInputBoundary {
-    private final VoteOutDataAccessInterface gameDataAccessObject;
-    private final ChatAPIAccessInterface storyDataAccessObject;
+    private final ConversationDataAccessInterface conversationDataAccessObject;
+    private final GameDataAccessInterface gameDataAccessObject;
+    private final ChatAPIAccessInterface gptDataAccessObject;
     private final VoteOutOutputBoundary userPresenter;
     private final Game game;
     private final PromptGenerator promptGenerator;
 
 
-    public VoteOutInteractor(VoteOutDataAccessInterface gameDataAccessObject, ChatAPIAccessInterface storyDataAccessObject, VoteOutOutputBoundary userPresenter) {
+    public VoteOutInteractor(ConversationDataAccessInterface conversationDataAccessObject, GameDataAccessInterface gameDataAccessObject, ChatAPIAccessInterface gptDataAccessObject, VoteOutOutputBoundary userPresenter) {
+        this.conversationDataAccessObject = conversationDataAccessObject;
         this.gameDataAccessObject = gameDataAccessObject;
-        this.storyDataAccessObject = storyDataAccessObject;
+        this.gptDataAccessObject = gptDataAccessObject;
         this.userPresenter = userPresenter;
         // Get the game
         game = gameDataAccessObject.getGame();
         // Get the prompt generator
-        promptGenerator = gameDataAccessObject.getPromptGenerator();
+        promptGenerator = conversationDataAccessObject.getPromptGenerator();
     }
 
     // This method prepares success view if a werewolf or villager is voted out
@@ -27,10 +31,11 @@ public class VoteOutInteractor implements VoteOutInputBoundary {
     @Override
     public void voteOutPlayer(VoteOutInputData voteOutInputData) {
         // Get name of player voted out from input data
-        String playerVotedOut = voteOutInputData.getVotedName();
+        String playerVotedOut = voteOutInputData.getPlayerVotedOut();
         // This case is specifically when the name isn't a werewolf nor is it a player, so the name doesn't exist
         if (!(game.getAliveVillagers().containsKey(playerVotedOut) || game.getAliveWerewolves().containsKey(playerVotedOut))) {
             // TODO: we can make "no such player exists" a constant or something later but not important right now
+            // TODO: see if we can move error to the presenter?
             userPresenter.prepareFailView("No such player exists");
         }
         else {
@@ -44,13 +49,17 @@ public class VoteOutInteractor implements VoteOutInputBoundary {
             }
             // Get the story
             String prompt = promptGenerator.generatePlayerVotedOutPrompt(playerVotedOut, playerRole);
-            String story = storyDataAccessObject.getResponse(prompt);
+            String story = gptDataAccessObject.getResponse(prompt);
+            // Save the gpt response
+            promptGenerator.getConversationHistory().addGPTMessage(story);
             // Kill that Player
             game.killPlayer(playerVotedOut);
             // Switch to night
             game.changeGameState();
             // Save game
             gameDataAccessObject.save(game);
+            // Save prompt generator
+            conversationDataAccessObject.save(promptGenerator);
             // Create the output data
             VoteOutOutputData voteOutOutputData = new VoteOutOutputData(playerVotedOut, playerRole, story);
             // Success View
