@@ -44,7 +44,7 @@ public class BeginIntroInteractor implements BeginIntroInputBoundary {
         this.gameDataAccessObject.save(this.game);
         this.conversationDataAccessObject.save(this.promptGenerator);
 
-        BeginIntroOutputData response = new BeginIntroOutputData(introStory);
-        this.beginIntroPresenter.prepareSuccessView(response);
+        BeginIntroOutputData beginIntroOutputData = new BeginIntroOutputData(introStory);
+        this.beginIntroPresenter.prepareSuccessView(beginIntroOutputData);
     }
 }

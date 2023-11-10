@@ -10,7 +10,7 @@ public class BeginIntroOutputData {
         this.introStory = introStory;
     }
 
-    public String getGPTMessage() {
+    public String getIntroStory() {
         return introStory;
     }
 }
