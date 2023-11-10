@@ -1,2 +1,7 @@
-package use_case.kill_villager;public class ClearInputBoundary {
+package use_case.kill_villager;
+
+import entity.Game;
+
+public interface KillVillagerInputBoundary {
+    void killVillager(KillVillagerInputData killVillagerInputData);
 }
