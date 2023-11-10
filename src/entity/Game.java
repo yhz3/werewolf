@@ -5,10 +5,10 @@ import entity.Player;
 
 public class Game {
 
-    private HashMap<String, Player> aliveVillagers;
-    private HashMap<String, Player> deadVillagers;
-    private HashMap<String, Player> aliveWerewolves;
-    private HashMap<String, Player> deadWerewolves;
+    private final HashMap<String, Player> aliveVillagers;
+    private final HashMap<String, Player> deadVillagers;
+    private final HashMap<String, Player> aliveWerewolves;
+    private final HashMap<String, Player> deadWerewolves;
     private boolean day;
 
     public Game(){
@@ -56,10 +56,12 @@ public class Game {
     public void killPlayer(String name){
         if (aliveVillagers.containsKey(name)){
             Player Villager = aliveVillagers.get(name);
+            Villager.setAlive(false);
             aliveVillagers.remove(name);
             deadVillagers.put(name, Villager);
         } else {
             Player Werewolf = aliveWerewolves.get(name);
+            Werewolf.setAlive(false);
             aliveWerewolves.remove(name);
             deadWerewolves.put(name, Werewolf);
         }
@@ -67,5 +69,9 @@ public class Game {
 
     public boolean checkGameOver(){
         return aliveVillagers.isEmpty() || aliveWerewolves.isEmpty();
+    }
+
+    public boolean checkVillagerWin(){
+        return aliveVillagers.isEmpty();
     }
 }
