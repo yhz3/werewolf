@@ -13,11 +13,9 @@ public class KillVillagerInteractor implements KillVillagerInputBoundary{
     // This is named storyDataAccessObject in VotePlayer use case, should probably choose one name or the other for
     // uniformity.
     private final Game game;
-    final String villager;
 
     public KillVillagerInteractor(KillVillagerDataAccessInterface killVillagerDataAccessInterface,
                                   KillVillagerOutputBoundary killVillagerPresenter,
-                                  KillVillagerInputData killVillagerInputData,
                                   ChatAPIAccessInterface gptDataAccessObject) {
         this.killVillagerDataAccessInterface = killVillagerDataAccessInterface;
         this.killVillagerPresenter = killVillagerPresenter;
@@ -27,17 +25,16 @@ public class KillVillagerInteractor implements KillVillagerInputBoundary{
         // adhering to the CA Engine.
         this.promptGenerator = killVillagerDataAccessInterface.getPromptGenerator();
         this.game = killVillagerDataAccessInterface.getGame();
-        this.villager = killVillagerInputData.getVillager();
-        // Pulling Villager name here instead of in killVillager() so the code down there is less messy.
-        // TODO: Ensure input data implementation is consistent with VotePlayer, and either both use input data or both
-        //  do not.
         this.gptDataAccessObject = gptDataAccessObject;
         // TODO: Figure out how to talk to ChatGPT without violating CA, since passing in gptDAO as a parameter means it
         //  is coming in as an input from the controller, which is not supposed to be able to talk to the DAO.
     }
 
     @Override
-    public void killVillager() {
+    public void killVillager(KillVillagerInputData killVillagerInputData) {
+        // Getting the villager name
+        String villager = killVillagerInputData.getVillager();
+
         if (game.getAliveVillagers().containsKey(villager)) {
             // Get the story
             String villagerDeathPrompt = promptGenerator.generatePlayerKilledPrompt(villager);
