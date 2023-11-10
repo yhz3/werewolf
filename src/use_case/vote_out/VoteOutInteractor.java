@@ -3,24 +3,27 @@ package use_case.vote_out;
 import entity.Game;
 import entity.PromptGenerator;
 import use_case.data_access_interface.ChatAPIAccessInterface;
-import use_case.data_access_interface.PromptGameDataAccessInterface;
+import use_case.data_access_interface.GameDataAccessInterface;
+import use_case.data_access_interface.PromptDataAccessInterface;
 
 public class VoteOutInteractor implements VoteOutInputBoundary {
-    private final PromptGameDataAccessInterface gameDataAccessObject;
+    private final PromptDataAccessInterface promptDataAccessObject;
+    private final GameDataAccessInterface gameDataAccessObject;
     private final ChatAPIAccessInterface gptDataAccessObject;
     private final VoteOutOutputBoundary userPresenter;
     private final Game game;
     private final PromptGenerator promptGenerator;
 
 
-    public VoteOutInteractor(PromptGameDataAccessInterface gameDataAccessObject, ChatAPIAccessInterface gptDataAccessObject, VoteOutOutputBoundary userPresenter) {
+    public VoteOutInteractor(PromptDataAccessInterface promptDataAccessObject, GameDataAccessInterface gameDataAccessObject, ChatAPIAccessInterface gptDataAccessObject, VoteOutOutputBoundary userPresenter) {
+        this.promptDataAccessObject = promptDataAccessObject;
         this.gameDataAccessObject = gameDataAccessObject;
         this.gptDataAccessObject = gptDataAccessObject;
         this.userPresenter = userPresenter;
         // Get the game
         game = gameDataAccessObject.getGame();
         // Get the prompt generator
-        promptGenerator = gameDataAccessObject.getPromptGenerator();
+        promptGenerator = promptDataAccessObject.getPromptGenerator();
     }
 
     // This method prepares success view if a werewolf or villager is voted out
@@ -53,7 +56,7 @@ public class VoteOutInteractor implements VoteOutInputBoundary {
             // Save game
             gameDataAccessObject.save(game);
             // Save prompt generator
-            gameDataAccessObject.save(promptGenerator);
+            promptDataAccessObject.save(promptGenerator);
             // Create the output data
             VoteOutOutputData voteOutOutputData = new VoteOutOutputData(playerVotedOut, playerRole, story);
             // Success View
