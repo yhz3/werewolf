@@ -1,14 +1,14 @@
 package use_case.vote_out;
 
 public class VoteOutInputData {
-    private final String votedName;
+    private final String playerVotedOut;
 
-    public VoteOutInputData(String votedName) {
-        this.votedName = votedName;
+    public VoteOutInputData(String playerVotedOut) {
+        this.playerVotedOut = playerVotedOut;
     }
 
-    public String getVotedName() {
-        return votedName;
+    public String getPlayerVotedOut() {
+        return playerVotedOut;
     }
 
 

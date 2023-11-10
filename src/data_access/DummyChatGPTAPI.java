@@ -1,6 +1,6 @@
 package data_access;
 
-import use_case.ChatAPIAccessInterface;
+import use_case.data_access_interface.ChatAPIAccessInterface;
 
 public class DummyChatGPTAPI implements ChatAPIAccessInterface {
     @Override
