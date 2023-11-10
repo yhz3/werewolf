@@ -6,6 +6,7 @@ import entity.Werewolf;
 import entity.Villager;
 import use_case.data_access_interface.GameDataAccessInterface;
 
+
 public class NewGameInteractor implements NewGameInputBoundary{
 
     private Game game;
