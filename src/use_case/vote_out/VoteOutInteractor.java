@@ -7,15 +7,15 @@ import use_case.data_access_interface.PromptGameDataAccessInterface;
 
 public class VoteOutInteractor implements VoteOutInputBoundary {
     private final PromptGameDataAccessInterface gameDataAccessObject;
-    private final ChatAPIAccessInterface storyDataAccessObject;
+    private final ChatAPIAccessInterface gptDataAccessObject;
     private final VoteOutOutputBoundary userPresenter;
     private final Game game;
     private final PromptGenerator promptGenerator;
 
 
-    public VoteOutInteractor(PromptGameDataAccessInterface gameDataAccessObject, ChatAPIAccessInterface storyDataAccessObject, VoteOutOutputBoundary userPresenter) {
+    public VoteOutInteractor(PromptGameDataAccessInterface gameDataAccessObject, ChatAPIAccessInterface gptDataAccessObject, VoteOutOutputBoundary userPresenter) {
         this.gameDataAccessObject = gameDataAccessObject;
-        this.storyDataAccessObject = storyDataAccessObject;
+        this.gptDataAccessObject = gptDataAccessObject;
         this.userPresenter = userPresenter;
         // Get the game
         game = gameDataAccessObject.getGame();
@@ -28,7 +28,7 @@ public class VoteOutInteractor implements VoteOutInputBoundary {
     @Override
     public void voteOutPlayer(VoteOutInputData voteOutInputData) {
         // Get name of player voted out from input data
-        String playerVotedOut = voteOutInputData.getVotedName();
+        String playerVotedOut = voteOutInputData.getPlayerVotedOut();
         // This case is specifically when the name isn't a werewolf nor is it a player, so the name doesn't exist
         if (!(game.getAliveVillagers().containsKey(playerVotedOut) || game.getAliveWerewolves().containsKey(playerVotedOut))) {
             // TODO: we can make "no such player exists" a constant or something later but not important right now
@@ -45,7 +45,7 @@ public class VoteOutInteractor implements VoteOutInputBoundary {
             }
             // Get the story
             String prompt = promptGenerator.generatePlayerVotedOutPrompt(playerVotedOut, playerRole);
-            String story = storyDataAccessObject.getResponse(prompt);
+            String story = gptDataAccessObject.getResponse(prompt);
             // Kill that Player
             game.killPlayer(playerVotedOut);
             // Switch to night
