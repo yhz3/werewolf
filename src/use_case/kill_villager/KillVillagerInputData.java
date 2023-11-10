@@ -1,7 +1,7 @@
 package use_case.kill_villager;
 
 public class KillVillagerInputData {
-    final private String villager;
+    private final String villager;
 
     public KillVillagerInputData(String villager) {
         this.villager = villager;

@@ -17,7 +17,7 @@ public class KillVillagerInteractor implements KillVillagerInputBoundary{
 
     public KillVillagerInteractor(KillVillagerDataAccessInterface killVillagerDataAccessInterface,
                                   KillVillagerOutputBoundary killVillagerPresenter,
-                                  String villager,
+                                  KillVillagerInputData killVillagerInputData,
                                   ChatAPIAccessInterface gptDataAccessObject) {
         this.killVillagerDataAccessInterface = killVillagerDataAccessInterface;
         this.killVillagerPresenter = killVillagerPresenter;
@@ -27,9 +27,8 @@ public class KillVillagerInteractor implements KillVillagerInputBoundary{
         // adhering to the CA Engine.
         this.promptGenerator = killVillagerDataAccessInterface.getPromptGenerator();
         this.game = killVillagerDataAccessInterface.getGame();
-        this.villager = villager;
-        // Notice that KillVillagerInputData is not used, as there is only a single string as input. This was a design
-        // choice as it seemed redundant.
+        this.villager = killVillagerInputData.getVillager();
+        // Pulling Villager name here instead of in killVillager() so the code down there is less messy.
         // TODO: Ensure input data implementation is consistent with VotePlayer, and either both use input data or both
         //  do not.
         this.gptDataAccessObject = gptDataAccessObject;
@@ -50,11 +49,12 @@ public class KillVillagerInteractor implements KillVillagerInputBoundary{
             // Switch to day
             game.changeGameState();
             killVillagerDataAccessInterface.save(game);
-            killVillagerPresenter.prepareSuccessView(villagerDeathStory);
+            KillVillagerOutputData killVillagerOutputData = new KillVillagerOutputData(villagerDeathStory);
+            killVillagerPresenter.prepareSuccessView(killVillagerOutputData);
             // If we follow Daniyaal's implementation, then we would also pass the name along as output data in case
             // we add extra features later on.
         } else {
-            killVillagerPresenter.prepareFailView(villager);
+            killVillagerPresenter.prepareFailView();
             // TODO: Daniyaal has a different approach for this in his code, bring this up in the meeting
         }
     }
