@@ -32,6 +32,9 @@ public class KillVillagerInteractor implements KillVillagerInputBoundary{
 
     @Override
     public void killVillager(KillVillagerInputData killVillagerInputData) {
+        // TODO: Edit method so both the game and promptGenerator are saved using their respective data access
+        //  interfaces.
+        // TODO: Edit
         // Getting the villager name
         String villager = killVillagerInputData.getVillager();
 
