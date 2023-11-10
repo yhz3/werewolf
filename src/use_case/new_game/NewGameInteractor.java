@@ -1,4 +1,4 @@
 package use_case.new_game;
 
-public class NewGameInteractor {
+public class NewGameInteractor implements NewGameInputBoundary {
 }
