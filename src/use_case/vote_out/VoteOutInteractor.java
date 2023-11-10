@@ -2,17 +2,18 @@ package use_case.vote_out;
 
 import entity.Game;
 import entity.PromptGenerator;
-import use_case.ChatAPIAccessInterface;
+import use_case.data_access_interface.ChatAPIAccessInterface;
+import use_case.data_access_interface.PromptGameDataAccessInterface;
 
 public class VoteOutInteractor implements VoteOutInputBoundary {
-    private final VoteOutDataAccessInterface gameDataAccessObject;
+    private final PromptGameDataAccessInterface gameDataAccessObject;
     private final ChatAPIAccessInterface storyDataAccessObject;
     private final VoteOutOutputBoundary userPresenter;
     private final Game game;
     private final PromptGenerator promptGenerator;
 
 
-    public VoteOutInteractor(VoteOutDataAccessInterface gameDataAccessObject, ChatAPIAccessInterface storyDataAccessObject, VoteOutOutputBoundary userPresenter) {
+    public VoteOutInteractor(PromptGameDataAccessInterface gameDataAccessObject, ChatAPIAccessInterface storyDataAccessObject, VoteOutOutputBoundary userPresenter) {
         this.gameDataAccessObject = gameDataAccessObject;
         this.storyDataAccessObject = storyDataAccessObject;
         this.userPresenter = userPresenter;
@@ -51,6 +52,8 @@ public class VoteOutInteractor implements VoteOutInputBoundary {
             game.changeGameState();
             // Save game
             gameDataAccessObject.save(game);
+            // Save prompt generator
+            gameDataAccessObject.save(promptGenerator);
             // Create the output data
             VoteOutOutputData voteOutOutputData = new VoteOutOutputData(playerVotedOut, playerRole, story);
             // Success View

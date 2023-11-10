@@ -2,6 +2,7 @@ package data_access;
 
 import entity.Game;
 import entity.PromptGenerator;
+import use_case.data_access.PromptGameDataAccessInterface;
 import use_case.vote_out.VoteOutDataAccessInterface;
 
 import java.io.BufferedReader;
@@ -12,7 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 // TODO: this class must implement all data access interfaces we create going forward
-public class GameDataAccessObject implements VoteOutDataAccessInterface {
+public class GameDataAccessObject implements PromptGameDataAccessInterface {
 
     // This is the csv file
     private final File csvFile;
@@ -52,5 +53,10 @@ public class GameDataAccessObject implements VoteOutDataAccessInterface {
     }
 
     public PromptGenerator getPromptGenerator() { return promptGenerator; }
+
+    @Override
+    public void save(PromptGenerator promptGenerator) {
+
+    }
 
 }
