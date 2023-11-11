@@ -5,6 +5,7 @@ import java.util.*;
 import entity.Werewolf;
 import entity.Villager;
 import use_case.data_access_interface.GameDataAccessInterface;
+import use_case.vote_out.VoteOutOutputData;
 
 public class NewGameInteractor implements NewGameInputBoundary{
 
@@ -12,9 +13,12 @@ public class NewGameInteractor implements NewGameInputBoundary{
 
     private GameDataAccessInterface gameData;
 
-    public NewGameInteractor(GameDataAccessInterface gameData){
+    private final NewGameOutputBoundary userPresenter;
+
+    public NewGameInteractor(GameDataAccessInterface gameData, NewGameOutputBoundary userPresenter){
         this.game = new Game();
         this.gameData = gameData;
+        this.userPresenter = userPresenter;
     }
 
     public void execute(NewGameInputData newGameInputData){
@@ -34,5 +38,7 @@ public class NewGameInteractor implements NewGameInputBoundary{
             PlayerNames.remove(name);
         }
         gameData.save(game);
+        NewGameOutputData newGameOutputData = new NewGameOutputData(game);
+        userPresenter.prepareSuccessView(newGameOutputData);
     }
 }

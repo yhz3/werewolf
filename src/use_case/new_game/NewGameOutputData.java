@@ -1,15 +1,23 @@
 package use_case.new_game;
 import entity.Game;
 
+import java.util.HashMap;
+
 public class NewGameOutputData {
 
-    private final Game newGame;
+    private final HashMap werewolves;
+    private final HashMap villagers;
 
     public NewGameOutputData(Game newGame){
-        this.newGame = newGame;
+        this.werewolves = newGame.getAliveWerewolves();
+        this.villagers = newGame.getAliveVillagers();
     }
 
-    public Game getNewGame(){
-        return newGame;
+    public HashMap getWerewolves(){
+        return werewolves;
+    }
+
+    public HashMap getVillagers() {
+        return villagers;
     }
 }
