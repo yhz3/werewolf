@@ -3,7 +3,6 @@ package interface_adapter;
 import java.beans.PropertyChangeListener;
 
 public abstract class ViewModel {
-
     private String viewName;
 
     public ViewModel(String viewName) {
