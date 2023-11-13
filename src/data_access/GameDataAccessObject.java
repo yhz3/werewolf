@@ -14,35 +14,20 @@ import java.util.Map;
 // TODO: this class must implement all data access interfaces we create going forward
 public class GameDataAccessObject implements GameDataAccessInterface {
 
-    // This is the csv file
-    private final File csvFile;
-    // This map is for the headers of our csv file // TODO: decide how to organize this
-    private final Map<String, Integer> headers = new LinkedHashMap<>();
-    // Game entity which we'll build from csv file
+    // We originally wrote to a text file for object persistence, but this seems to work a lot better since we would
+    // not need to keep reading and writing to a text file, which would be quite tedious.
+    // By design, a game should be played in once sitting, i.e. the software is booted up and the game is completed
+    // before the software is closed, so there is no need for data to be in a format such that it persists even after
+    // the software is closed.
     private Game game;
 
-    public GameDataAccessObject(String csvPath) throws IOException {
-        this.csvFile = new File(csvPath);
-        // TODO: We create the headers around here
-
-        if (csvFile.length() == 0) {
-            save(game);
-        } else {
-
-            try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
-                String header = reader.readLine();
-
-                String row;
-                while ((row = reader.readLine()) != null) {
-                    // TODO: Decide how we'll read in the game
-                }
-            }
-        }
+    public GameDataAccessObject(Game game) {
+        this.game = game;
     }
 
     @Override
     public void save(Game game) {
-
+        this.game = game;
     }
 
     public Game getGame() {
