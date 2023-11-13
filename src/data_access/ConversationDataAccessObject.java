@@ -1,5 +1,6 @@
 package data_access;
 
+import entity.ConversationHistory;
 import entity.PromptGenerator;
 import use_case.data_access_interface.ConversationDataAccessInterface;
 
@@ -12,37 +13,23 @@ import java.util.Map;
 
 public class ConversationDataAccessObject implements ConversationDataAccessInterface {
 
-    // This is the csv file
-    private final File csvFile;
-    // This map is for the headers of our csv file // TODO: decide how to organize this
-    private final Map<String, Integer> headers = new LinkedHashMap<>();
-
-    // PromptGenerator entity which we'll build from csv flie
+    // We are calling it the ConversationDataAccessObject because we originally only wanted the DAO to save
+    // ConversationHistory but then people forgot and treated the DAO like a PromptGenerator DAO so now we are keeping
+    // the name without refactoring other code because we have bigger issues to deal with for now.
+    // We recognize that this is contributing to the technical debt of the project.
     private PromptGenerator promptGenerator;
+    // Not making this method final so that the save() works.
 
-    public ConversationDataAccessObject(String csvPath) throws IOException {
-        this.csvFile = new File(csvPath);
-        // TODO: We create the headers around here
-
-        if (csvFile.length() == 0) {
-            save(promptGenerator);
-        } else {
-
-            try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
-                String header = reader.readLine();
-
-                String row;
-                while ((row = reader.readLine()) != null) {
-                    // TODO: Decide how we'll read in the game
-                }
-            }
-        }
+    public ConversationDataAccessObject(ConversationHistory conversationHistory) throws IOException {
+        this.promptGenerator = new PromptGenerator(conversationHistory);
     }
 
-    public PromptGenerator getPromptGenerator() { return promptGenerator; }
+    public PromptGenerator getPromptGenerator() {
+        return promptGenerator;
+    }
 
     @Override
     public void save(PromptGenerator promptGenerator) {
-
+        this.promptGenerator = promptGenerator;
     }
 }
