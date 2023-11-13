@@ -5,5 +5,6 @@ import use_case.new_game.NewGameOutputData;
 
 public class NewGamePresenter implements NewGameOutputBoundary {
 
+    public void prepareFailView(){}
     public void prepareSuccessView(NewGameOutputData newGameOutputData){}
 }
