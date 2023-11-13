@@ -24,6 +24,10 @@ public class NewGameInteractor implements NewGameInputBoundary{
     public void execute(NewGameInputData newGameInputData){
         Random random = new Random();
         ArrayList<String> PlayerNames = newGameInputData.getUserNames();
+        Set<String> checkDuplicates = new HashSet<String>(PlayerNames);
+        if (PlayerNames.size() < 4 || checkDuplicates.size() != PlayerNames.size()){
+            userPresenter.prepareFailView();
+        }
         int numWerewolves = PlayerNames.size() / 3;
         for (int i = 0; i < numWerewolves; i++){
             String name = PlayerNames.get(random.nextInt(PlayerNames.size()));
