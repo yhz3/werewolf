@@ -16,16 +16,22 @@ public class VoteOutPresenter implements VoteOutOutputBoundary {
 
     @Override
     public void prepareSuccessView(VoteOutOutputData player) {
+        // Get attributes from output data
         String playerVotedOut = player.getPlayerVotedOut();
         String playerRole = player.getPlayerRole();
         String story = player.getStory();
-
+        // Get the current state from the view model
         VoteOutState voteOutState = voteOutViewModel.getState();
+        // Change state's attributes
         voteOutState.setPlayerVotedOut(playerVotedOut);
         voteOutState.setPlayerRole(playerRole);
         voteOutState.setStory(story);
-        // fire property changed
-        this.voteOutViewModel.firePropertyChanged();
+        // Set the state in the view model again to update it
+        voteOutViewModel.setState(voteOutState);
+        // Set a new view
+        /** Use the view manager model to switch to a new view?**/
+        // indicate that we have changed the view
+        this.viewManagerModel.firePropertyChanged();
     }
 
     @Override
