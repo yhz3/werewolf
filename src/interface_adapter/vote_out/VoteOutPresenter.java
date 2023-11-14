@@ -19,16 +19,19 @@ public class VoteOutPresenter implements VoteOutOutputBoundary {
         String playerVotedOut = player.getPlayerVotedOut();
         String playerRole = player.getPlayerRole();
         String story = player.getStory();
-        this.voteOutViewModel.setPlayerVotedOut(playerVotedOut);
-        this.voteOutViewModel.setPlayerRole(playerRole);
-        this.voteOutViewModel.setStory(player.getStory());
+
+        VoteOutState voteOutState = voteOutViewModel.getState();
+        voteOutState.setPlayerVotedOut(playerVotedOut);
+        voteOutState.setPlayerRole(playerRole);
+        voteOutState.setStory(story);
         // fire property changed
         this.voteOutViewModel.firePropertyChanged();
     }
 
     @Override
     public void prepareFailView(String error) {
-        this.voteOutViewModel.setError(error);
+        VoteOutState voteOutState = voteOutViewModel.getState();
+        voteOutState.setError(error);
         this.voteOutViewModel.firePropertyChanged();
     }
 

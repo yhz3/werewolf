@@ -5,29 +5,11 @@ import interface_adapter.ViewModel;
 import java.beans.PropertyChangeListener;
 
 public class VoteOutViewModel extends ViewModel {
-    private String playerVotedOut;
-    private String playerRole;
-    private String story;
-    private String error;
 
-    public VoteOutViewModel(String viewName) {
-        super(viewName);
-    }
+    private VoteOutState state = new VoteOutState();
 
-    public void setPlayerVotedOut(String playerVotedOut) {
-        this.playerVotedOut = playerVotedOut;
-    }
-
-    public void setPlayerRole(String playerRole) {
-        this.playerRole = playerRole;
-    }
-
-    public void setStory(String story) {
-        this.story = story;
-    }
-
-    public void setError(String error) {
-        this.error = error;
+    public VoteOutViewModel() {
+        super("vote out player");
     }
 
     @Override
@@ -38,5 +20,9 @@ public class VoteOutViewModel extends ViewModel {
     @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
 
+    }
+
+    public VoteOutState getState() {
+        return this.state;
     }
 }
