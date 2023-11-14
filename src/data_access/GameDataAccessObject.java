@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-// TODO: this class must implement all data access interfaces we create going forward
 public class GameDataAccessObject implements GameDataAccessInterface {
 
     // We originally wrote to a text file for object persistence, but this seems to work a lot better since we would
