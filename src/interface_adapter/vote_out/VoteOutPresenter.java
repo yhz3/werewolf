@@ -6,11 +6,13 @@ import use_case.vote_out.VoteOutOutputData;
 
 public class VoteOutPresenter implements VoteOutOutputBoundary {
 
+    private final VoteOutStoryViewModel voteOutStoryViewModel;
     private final VoteOutViewModel voteOutViewModel;
     private ViewManagerModel viewManagerModel;
 
 
-    public VoteOutPresenter(VoteOutViewModel voteOutViewModel) {
+    public VoteOutPresenter(VoteOutStoryViewModel voteOutStoryViewModel, VoteOutViewModel voteOutViewModel) {
+        this.voteOutStoryViewModel = voteOutStoryViewModel;
         this.voteOutViewModel = voteOutViewModel;
     }
 
@@ -21,15 +23,15 @@ public class VoteOutPresenter implements VoteOutOutputBoundary {
         String playerRole = player.getPlayerRole();
         String story = player.getStory();
         // Get the current state from the view model
-        VoteOutState voteOutState = voteOutViewModel.getState();
+        VoteOutStoryState voteOutStoryState = voteOutStoryViewModel.getState();
         // Change state's attributes
-        voteOutState.setPlayerVotedOut(playerVotedOut);
-        voteOutState.setPlayerRole(playerRole);
-        voteOutState.setStory(story);
+        voteOutStoryState.setPlayerVotedOut(playerVotedOut);
+        voteOutStoryState.setPlayerRole(playerRole);
+        voteOutStoryState.setStory(story);
         // Set the state in the view model again to update it
-        voteOutViewModel.setState(voteOutState);
+        voteOutStoryViewModel.setState(voteOutStoryState);
         // Set a new view
-        /** Use the view manager model to switch to a new view?**/
+        this.viewManagerModel.setActiveView(voteOutStoryViewModel.getViewName());
         // indicate that we have changed the view
         this.viewManagerModel.firePropertyChanged();
     }
