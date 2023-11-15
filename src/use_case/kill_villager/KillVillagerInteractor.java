@@ -64,7 +64,7 @@ public class KillVillagerInteractor implements KillVillagerInputBoundary{
             // If we follow Daniyaal's implementation, then we would also pass the name along as output data in case
             // we add extra features later on.
         } else {
-            killVillagerPresenter.prepareFailView();
+            killVillagerPresenter.prepareFailView("Person is not a live villager.");
             // TODO: Daniyaal has a different approach for this in his code, bring this up in the meeting
         }
     }
