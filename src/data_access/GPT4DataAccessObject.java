@@ -1,2 +1,5 @@
-package data_access;public class GPT4DataAccessObject {
+package data_access;
+
+public class GPT4DataAccessObject {
+
 }

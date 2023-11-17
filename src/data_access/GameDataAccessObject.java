@@ -20,6 +20,7 @@ public class GameDataAccessObject implements GameDataAccessInterface {
     // before the software is closed, so there is no need for data to be in a format such that it persists even after
     // the software is closed.
     private Game game;
+    // Not making this attribute final so that the save() works.
 
     public GameDataAccessObject(Game game) {
         this.game = game;
