@@ -27,7 +27,7 @@ public abstract class Player {
         this.alive = alive;
     }
 
-    String getRole() {
+    public String getRole() {
         return role;
     }
 

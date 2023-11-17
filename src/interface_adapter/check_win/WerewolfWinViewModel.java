@@ -1,18 +1,18 @@
-package interface_adapter.new_game;
+package interface_adapter.check_win;
 
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class NewGameViewModel extends ViewModel {
+public class WerewolfWinViewModel extends ViewModel {
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    public NewGameViewModel(){super("Started new Game");}
+    public WerewolfWinViewModel(){super("Werewolf Win");}
 
     public void firePropertyChanged(){
-        support.firePropertyChange("state", null, "New game started.");
+        support.firePropertyChange("state", null, "Werewolves have won.");
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener){
