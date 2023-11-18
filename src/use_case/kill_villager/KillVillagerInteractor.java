@@ -61,11 +61,8 @@ public class KillVillagerInteractor implements KillVillagerInputBoundary{
             // Saves both the game and the conversation history.
             KillVillagerOutputData killVillagerOutputData = new KillVillagerOutputData(villagerDeathStory);
             killVillagerPresenter.prepareSuccessView(killVillagerOutputData);
-            // If we follow Daniyaal's implementation, then we would also pass the name along as output data in case
-            // we add extra features later on.
         } else {
-            killVillagerPresenter.prepareFailView();
-            // TODO: Daniyaal has a different approach for this in his code, bring this up in the meeting
+            killVillagerPresenter.prepareFailView("Person is not a live villager.");
         }
     }
 }
