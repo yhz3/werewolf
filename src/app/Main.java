@@ -28,6 +28,25 @@ import view.ViewManager;
 import javax.swing.*;
 import java.awt.*;
 
+/*
+General Process for Implementing UI
+
+1. Add the View. Follow examples like NewGameView, BeginIntroView. It needs to take in the ViewModel and Controller.
+    Make sure to:
+    - Add a PropertyChangerListener to the ViewModel, edit the propertyChange method to do something
+    - Add titles, input fields (with KeyListeners, labels, buttons (with ActionListeners), set the layout
+2. Construct the View in the main program. You will essentially link everything together.
+    I have organized it in the way that you just need to:
+    a) Add the View Model under "// View Models"
+    b) Create and add the View under "// Add the ""
+        - Be sure to use a helper method i.e. get<Name>View to organize code. See examples at the end.
+3. That's basically it, but there's going to be probably many issues. Some common things you might need to do:
+    - Add stuff to the View Models / States that are missing (titles, button labels etc.)
+    - Add the NEXT ViewModel to the current Presenter's prepareSuccessview if you want it to automatically switch.
+        For example, see NewGamePresenter. This means the current Presenter depends on the next ViewModel.
+ */
+
+
 public class Main {
     public static void main(String[] args) {
         // Build the main program window, the main panel containing the
@@ -50,7 +69,6 @@ public class Main {
         BeginIntroViewModel beginIntroViewModel = new BeginIntroViewModel();
         KillVillagerViewModel killVillagerViewModel = new KillVillagerViewModel();
         VoteOutViewModel voteOutViewModel = new VoteOutViewModel();
-
 
         // The various View objects. Only one view is visible at a time.
         JPanel views = new JPanel(cardLayout);

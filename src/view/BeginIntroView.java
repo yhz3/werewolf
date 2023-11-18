@@ -18,7 +18,7 @@ public class BeginIntroView extends JPanel implements ActionListener, PropertyCh
     private final BeginIntroController BeginIntroController;
     private final JButton beginIntro;
 
-    public BeginIntroView(BeginIntroViewModel beginIntroViewModel, interface_adapter.begin_intro.BeginIntroController beginIntroController) {
+    public BeginIntroView(BeginIntroViewModel beginIntroViewModel, BeginIntroController beginIntroController) {
         this.beginIntroViewModel = beginIntroViewModel;
         this.BeginIntroController = beginIntroController;
         beginIntroViewModel.addPropertyChangeListener(this);
