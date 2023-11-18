@@ -3,7 +3,7 @@ package interface_adapter.kill_villager;
 public class KillVillagerState {
 
     private String villager = "";
-    private String error = "";
+    private String error = null;
 
     private String playerDeathStory = "";
     // This will be set by the voteOut use case

@@ -8,6 +8,12 @@ import use_case.kill_villager.KillVillagerOutputData;
 
 public class KillVillagerPresenter implements KillVillagerOutputBoundary {
 
+    public final String TITLE_LABEL = "Kill Villager View";
+
+    public final String PLAYER_LABEL = "Enter villager";
+
+    public final String CONFIRM_LABEL = "Confirm";
+
     private final KillVillagerViewModel killVillagerViewModel;
     private final VoteOutViewModel voteOutViewModel;
     private final ViewManagerModel viewManagerModel;
