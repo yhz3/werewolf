@@ -42,7 +42,6 @@ public class NewGameInteractor implements NewGameInputBoundary{
             PlayerNames.remove(name);
         }
         gameData.save(game);
-        NewGameOutputData newGameOutputData = new NewGameOutputData(game);
-        userPresenter.prepareSuccessView(newGameOutputData);
+        userPresenter.prepareSuccessView();
     }
 }
