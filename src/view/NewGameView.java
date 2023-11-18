@@ -3,6 +3,7 @@ package view;
 import interface_adapter.new_game.NewGameController;
 import interface_adapter.new_game.NewGameState;
 import interface_adapter.new_game.NewGameViewModel;
+import use_case.begin_intro.BeginIntroInputData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,12 +14,12 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class NewGameView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "new game";
     private final NewGameViewModel newGameViewModel;
-    private final NewGameController newGameController;
     private final JTextField[] playerInputFields;
 
     private final JButton newGame;
@@ -31,7 +32,6 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
         }
 
         this.newGameViewModel = newGameViewModel;
-        this.newGameController = newGameController;
         newGameViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel(NewGameViewModel.TITLE_LABEL);
@@ -63,7 +63,6 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
                                     players.add(player);
                                 }
                             }
-
                             newGameController.execute(players);
                         }
                     }
@@ -108,11 +107,14 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
+        if (evt.getNewValue() instanceof NewGameState state) {
+            String message = "Villagers: " + Arrays.toString(state.getVillagers()) +
+                    "\nWerewolves: " + Arrays.toString(state.getWerewolves());
+            JOptionPane.showMessageDialog(this, message);
+        }
     }
 }

@@ -6,6 +6,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class KillVillagerViewModel extends ViewModel {
+    public static final String TITLE_LABEL = "Kill Villager View";
+    public static final String BUTTON_LABEL = "Kill Villager";
 
     private KillVillagerState state = new KillVillagerState();
 

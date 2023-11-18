@@ -20,7 +20,7 @@ public class ConversationDataAccessObject implements ConversationDataAccessInter
     private PromptGenerator promptGenerator;
     // Not making this method final so that the save() works.
 
-    public ConversationDataAccessObject(ConversationHistory conversationHistory) throws IOException {
+    public ConversationDataAccessObject(ConversationHistory conversationHistory) {
         this.promptGenerator = new PromptGenerator(conversationHistory);
     }
 
