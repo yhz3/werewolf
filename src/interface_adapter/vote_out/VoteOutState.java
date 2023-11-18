@@ -19,4 +19,7 @@ public class VoteOutState {
 
     private String playerToVoteOut;
     private String error;
+
+    public void setVillagerDeathStory(String villagerDeathStory) {
+    }
 }

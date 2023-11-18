@@ -19,5 +19,4 @@ public class KillVillagerStoryState {
     public String getVillager() {
         return villager;
     }
-]
 }
