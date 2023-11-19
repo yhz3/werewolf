@@ -8,6 +8,10 @@ import java.beans.PropertyChangeSupport;
 public class KillVillagerViewModel extends ViewModel {
     public static final String TITLE_LABEL = "Kill Villager View";
     public static final String BUTTON_LABEL = "Kill Villager";
+    public static final String VILLAGER_LABEL = "Enter Villager Name";
+
+    // So the ViewModel has the current Villagers left in the game
+    private String[] villagers;
 
     private KillVillagerState state = new KillVillagerState();
 
@@ -23,6 +27,14 @@ public class KillVillagerViewModel extends ViewModel {
 
     public KillVillagerState getState() {
         return state;
+    }
+
+    public void setVillagers(String[] villagers) {
+        this.villagers = villagers;
+    }
+
+    public String[] getVillagers() {
+        return villagers;
     }
 
     public void firePropertyChanged() {

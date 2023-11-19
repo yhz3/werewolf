@@ -125,7 +125,7 @@ public class Main {
         KillVillagerInteractor killVillagerInteractor = new KillVillagerInteractor(conversationDataAccessObject, gameDataAccessObject, killVillagerPresenter, chatAPIAccessInterface);
         KillVillagerController killVillagerController = new KillVillagerController(killVillagerInteractor);
 
-        return new KillVillagerView(killVillagerViewModel, killVillagerController, killVillagerViewModel, killVillagerController);
+        return new KillVillagerView(killVillagerViewModel, killVillagerController);
         
     }
 

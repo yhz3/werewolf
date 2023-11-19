@@ -21,6 +21,8 @@ public class BeginIntroPresenter implements BeginIntroOutputBoundary {
         beginIntroViewModel.setIntroStory(beginIntroOutputData.getIntroStory());
         beginIntroViewModel.firePropertyChanged();
 
+        killVillagerViewModel.setVillagers(beginIntroOutputData.getVillagers());
+
         viewManagerModel.setActiveView(killVillagerViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
