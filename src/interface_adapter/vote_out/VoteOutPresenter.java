@@ -31,6 +31,7 @@ public class VoteOutPresenter implements VoteOutOutputBoundary {
         voteOutStoryState.setStory(story);
         // Set the state in the view model again to update it
         voteOutStoryViewModel.setState(voteOutStoryState);
+        voteOutViewModel.firePropertyChanged();
         // Set a new view
         this.viewManagerModel.setActiveView(voteOutStoryViewModel.getViewName());
         // indicate that we have changed the view
