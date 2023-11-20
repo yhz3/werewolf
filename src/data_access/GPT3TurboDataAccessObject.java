@@ -5,7 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 
-public class GPT4DataAccessObject {
+public class GPT3TurboDataAccessObject {
     public static String chatGPT(String prompt) {
         String url = "https://api.openai.com/v1/chat/completions";
         String apiKey = "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";
