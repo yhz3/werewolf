@@ -44,4 +44,16 @@ public class ConversationHistory {
         }
         return output.toString();
     }
+
+    public String getConversationToCompress() {
+        int historyLength = history.size();
+        if (historyLength > 3) {
+            StringBuilder messageToCompress = new StringBuilder();
+            for (int i = 0; i < historyLength - 1; i++) {
+                messageToCompress.append(history.remove(0));
+            }
+            return messageToCompress.toString();
+        }
+        return null;
+    }
 }

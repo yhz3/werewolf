@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -30,6 +31,12 @@ public class ConversationDataAccessObject implements ConversationDataAccessInter
 
     @Override
     public void save(PromptGenerator promptGenerator) {
-        this.promptGenerator = promptGenerator;
+        ConversationHistory conversationHistory = promptGenerator.getConversationHistory();
+        String conversationToCompress = conversationHistory.getConversationToCompress();
+        if (conversationToCompress == null) {
+            this.promptGenerator = promptGenerator;
+        } else {
+            GPT4DataAccessObject dataAccessObject = new GPT4DataAccessObject();
+        }
     }
 }
