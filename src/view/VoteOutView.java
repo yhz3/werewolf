@@ -1,10 +1,10 @@
 package view;
 
-import interface_adapter.kill_villager.KillVillagerController;
 import interface_adapter.kill_villager.KillVillagerState;
 import interface_adapter.kill_villager.KillVillagerViewModel;
-import interface_adapter.new_game.NewGameState;
-import interface_adapter.new_game.NewGameViewModel;
+import interface_adapter.vote_out.VoteOutController;
+import interface_adapter.vote_out.VoteOutState;
+import interface_adapter.vote_out.VoteOutViewModel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,36 +13,40 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Arrays;
 
-public class KillVillagerView extends JPanel implements ActionListener, PropertyChangeListener {
-    public final String viewName = "kill villager";
-    private final KillVillagerViewModel killVillagerViewModel;
-    private final KillVillagerController killVillagerController;
-    private final JButton killVillager;
+public class VoteOutView extends JPanel implements ActionListener, PropertyChangeListener {
 
-    public KillVillagerView(KillVillagerViewModel killVillagerViewModel, KillVillagerController killVillagerController) {
-        this.killVillagerViewModel = killVillagerViewModel;
-        this.killVillagerController = killVillagerController;
-        killVillagerViewModel.addPropertyChangeListener(this);
+    public final String viewName = "vote out player";
 
-        JLabel title = new JLabel(KillVillagerViewModel.TITLE_LABEL);
+    private final VoteOutViewModel voteOutViewModel;
+
+    private final VoteOutController voteOutController;
+
+    private final JButton voteOutPlayer;
+
+    public VoteOutView(VoteOutViewModel voteOutViewModel, VoteOutController voteOutController){
+        this.voteOutViewModel = voteOutViewModel;
+        this.voteOutController = voteOutController;
+        voteOutViewModel.addPropertyChangeListener(this);
+
+        JLabel title = new JLabel(VoteOutViewModel.TITLE_LABEL);
 
         JPanel buttons = new JPanel();
-        killVillager = new JButton(KillVillagerViewModel.BUTTON_LABEL);
-        buttons.add(killVillager);
 
-        JTextField villagerInputField = new JTextField(15);
-        LabelTextPanel villagerInfo = new LabelTextPanel(new JLabel(KillVillagerViewModel.VILLAGER_LABEL), villagerInputField);
+        voteOutPlayer = new JButton(VoteOutViewModel.BUTTON_LABEL);
+        buttons.add(voteOutPlayer);
 
-        villagerInputField.addKeyListener(
+        JTextField playerInputField = new JTextField(15);
+        LabelTextPanel playerInfo = new LabelTextPanel(new JLabel(VoteOutViewModel.PLAYER_LABEL), playerInputField);
+
+        playerInputField.addKeyListener(
                 new KeyListener() {
                     @Override
                     public void keyTyped(KeyEvent e) {
-                        KillVillagerState currentState = killVillagerViewModel.getState();
-                        String text = villagerInputField.getText() + e.getKeyChar();
-                        currentState.setVillager(text);
-                        killVillagerViewModel.setState(currentState);
+                        VoteOutState currentState = voteOutViewModel.getState();
+                        String text = playerInputField.getText() + e.getKeyChar();
+                        currentState.setPlayerToVoteOut(text);
+                        voteOutViewModel.setState(currentState);
                     }
 
                     @Override
@@ -55,16 +59,17 @@ public class KillVillagerView extends JPanel implements ActionListener, Property
 
                     }
                 }
+
         );
 
-        killVillager.addActionListener(
+
+        voteOutPlayer.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent evt) {
-                        if (evt.getSource().equals(killVillager)) {
-                            KillVillagerState currentState = killVillagerViewModel.getState();
-
-                            killVillagerController.killVillager(currentState.getVillager());
+                        if (evt.getSource().equals(voteOutPlayer)) {
+                            VoteOutState currentState = voteOutViewModel.getState();
+                            voteOutController.voteOutPlayer(currentState.getPlayerToVoteOut());
                         }
                     }
                 }
@@ -72,19 +77,16 @@ public class KillVillagerView extends JPanel implements ActionListener, Property
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(title);
 
-        this.add(villagerInfo);
+        this.add(playerInfo);
 
         this.add(buttons);
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
-
     }
 
-    @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if (evt.getNewValue() instanceof KillVillagerState state) {
+        if (evt.getNewValue() instanceof VoteOutState state) {
             if (state.getError() != null) {
                 JOptionPane.showMessageDialog(this, state.getError());
             } else { //This else block is temporarily retired. If we want a pop up, add it again.
@@ -100,4 +102,5 @@ public class KillVillagerView extends JPanel implements ActionListener, Property
             }
         }
     }
+
 }

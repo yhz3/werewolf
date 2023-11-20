@@ -15,15 +15,16 @@ import interface_adapter.kill_villager.KillVillagerViewModel;
 import interface_adapter.new_game.NewGameController;
 import interface_adapter.new_game.NewGamePresenter;
 import interface_adapter.new_game.NewGameViewModel;
+import interface_adapter.vote_out.VoteOutController;
+import interface_adapter.vote_out.VoteOutPresenter;
+import interface_adapter.vote_out.VoteOutStoryViewModel;
 import interface_adapter.vote_out.VoteOutViewModel;
 import use_case.begin_intro.BeginIntroInteractor;
 import use_case.data_access_interface.ChatAPIAccessInterface;
 import use_case.kill_villager.KillVillagerInteractor;
 import use_case.new_game.NewGameInteractor;
-import view.BeginIntroView;
-import view.KillVillagerView;
-import view.NewGameView;
-import view.ViewManager;
+import use_case.vote_out.VoteOutInteractor;
+import view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -69,6 +70,7 @@ public class Main {
         BeginIntroViewModel beginIntroViewModel = new BeginIntroViewModel();
         KillVillagerViewModel killVillagerViewModel = new KillVillagerViewModel();
         VoteOutViewModel voteOutViewModel = new VoteOutViewModel();
+        VoteOutStoryViewModel voteOutStoryViewModel = new VoteOutStoryViewModel();
 
         // The various View objects. Only one view is visible at a time.
         JPanel views = new JPanel(cardLayout);
@@ -90,6 +92,9 @@ public class Main {
         KillVillagerView killVillagerView = getKillVillagerView(viewManagerModel, killVillagerViewModel, voteOutViewModel, gameDataAccessObject, conversationDataAccessObject, chatAPIAccessInterface);
         views.add(killVillagerView, killVillagerView.viewName);
 
+        // Add the VoteOutView
+        VoteOutView voteOutView = getVoteOutView(viewManagerModel, voteOutViewModel, voteOutStoryViewModel, gameDataAccessObject, conversationDataAccessObject, chatAPIAccessInterface);
+        views.add(voteOutView, voteOutView.viewName);
 
         viewManagerModel.setActiveView(newGameView.viewName);
         viewManagerModel.firePropertyChanged();
@@ -127,6 +132,14 @@ public class Main {
 
         return new KillVillagerView(killVillagerViewModel, killVillagerController);
         
+    }
+
+    private static VoteOutView getVoteOutView(ViewManagerModel viewManagerModel, VoteOutViewModel voteOutViewModel, VoteOutStoryViewModel voteOutStoryViewModel, GameDataAccessObject gameDataAccessObject, ConversationDataAccessObject conversationDataAccessObject, ChatAPIAccessInterface chatAPIAccessInterface){
+        VoteOutPresenter voteOutPresenter = new VoteOutPresenter(voteOutStoryViewModel, voteOutViewModel);
+        VoteOutInteractor voteOutInteractor = new VoteOutInteractor(conversationDataAccessObject, gameDataAccessObject, chatAPIAccessInterface, voteOutPresenter);
+        VoteOutController voteOutController = new VoteOutController(voteOutInteractor);
+
+        return new VoteOutView(voteOutViewModel, voteOutController);
     }
 
 

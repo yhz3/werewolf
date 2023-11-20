@@ -20,6 +20,13 @@ public class VoteOutState {
     private String playerToVoteOut;
     private String error;
 
+    private String deathStory;
+
     public void setVillagerDeathStory(String villagerDeathStory) {
+        this.deathStory = villagerDeathStory;
+    }
+
+    public String getPlayerDeathStory(){
+        return deathStory;
     }
 }

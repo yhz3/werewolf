@@ -7,7 +7,10 @@ import java.beans.PropertyChangeSupport;
 
 public class VoteOutViewModel extends ViewModel {
 
-    // LABEL NAMES HERE
+    public static final String TITLE_LABEL = "Vote out view";
+    public static final String BUTTON_LABEL = "Vote out Player";
+
+    public static final String PLAYER_LABEL = "Enter player name:";
     private VoteOutState state = new VoteOutState();
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
