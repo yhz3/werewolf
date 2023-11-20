@@ -8,12 +8,13 @@ public class VoteOutPresenter implements VoteOutOutputBoundary {
 
     private final VoteOutStoryViewModel voteOutStoryViewModel;
     private final VoteOutViewModel voteOutViewModel;
-    private ViewManagerModel viewManagerModel;
+    private final ViewManagerModel viewManagerModel;
 
 
-    public VoteOutPresenter(VoteOutStoryViewModel voteOutStoryViewModel, VoteOutViewModel voteOutViewModel) {
+    public VoteOutPresenter(VoteOutStoryViewModel voteOutStoryViewModel, VoteOutViewModel voteOutViewModel, ViewManagerModel viewManagerModel) {
         this.voteOutStoryViewModel = voteOutStoryViewModel;
         this.voteOutViewModel = voteOutViewModel;
+        this.viewManagerModel = viewManagerModel;
     }
 
     @Override

@@ -135,7 +135,7 @@ public class Main {
     }
 
     private static VoteOutView getVoteOutView(ViewManagerModel viewManagerModel, VoteOutViewModel voteOutViewModel, VoteOutStoryViewModel voteOutStoryViewModel, GameDataAccessObject gameDataAccessObject, ConversationDataAccessObject conversationDataAccessObject, ChatAPIAccessInterface chatAPIAccessInterface){
-        VoteOutPresenter voteOutPresenter = new VoteOutPresenter(voteOutStoryViewModel, voteOutViewModel);
+        VoteOutPresenter voteOutPresenter = new VoteOutPresenter(voteOutStoryViewModel, voteOutViewModel, viewManagerModel);
         VoteOutInteractor voteOutInteractor = new VoteOutInteractor(conversationDataAccessObject, gameDataAccessObject, chatAPIAccessInterface, voteOutPresenter);
         VoteOutController voteOutController = new VoteOutController(voteOutInteractor);
 
