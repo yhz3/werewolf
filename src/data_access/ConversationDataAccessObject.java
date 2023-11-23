@@ -32,11 +32,16 @@ public class ConversationDataAccessObject implements ConversationDataAccessInter
     @Override
     public void save(PromptGenerator promptGenerator) {
         ConversationHistory conversationHistory = promptGenerator.getConversationHistory();
+
+        // Compress old conversation before saving.
         String conversationToCompress = conversationHistory.getConversationToCompress();
-        if (conversationToCompress == null) {
-            this.promptGenerator = promptGenerator;
-        } else {
-            GPT4DataAccessObject dataAccessObject = new GPT4DataAccessObject();
+        String prompt = "Summarize the following so that it can be used on ChatGPT for context.\n"
+                + conversationToCompress;
+        if (conversationToCompress != null) {
+            DummyCompressionChatGPTAPI dummyCompressionChatGPTAPI = new DummyCompressionChatGPTAPI();
+            String compressedConversation = dummyCompressionChatGPTAPI.getResponse(prompt);
+            conversationHistory.addCompressedConversation(compressedConversation);
         }
+        this.promptGenerator = promptGenerator;
     }
 }

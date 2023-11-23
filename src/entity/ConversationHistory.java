@@ -47,6 +47,9 @@ public class ConversationHistory {
 
     public String getConversationToCompress() {
         int historyLength = history.size();
+
+        // If the history length is more than 3, we will remove the messages until there remains only one message and
+        // return the history
         if (historyLength > 3) {
             StringBuilder messageToCompress = new StringBuilder();
             for (int i = 0; i < historyLength - 1; i++) {
@@ -55,5 +58,9 @@ public class ConversationHistory {
             return messageToCompress.toString();
         }
         return null;
+    }
+
+    public void addCompressedConversation(String compressedConversation) {
+        history.add(0, compressedConversation);
     }
 }
