@@ -1,8 +1,6 @@
 package app;
 
-import data_access.ConversationDataAccessObject;
-import data_access.DummyChatGPTAPI;
-import data_access.GameDataAccessObject;
+import data_access.*;
 import entity.ConversationHistory;
 import entity.Game;
 import interface_adapter.ViewManagerModel;
@@ -50,6 +48,10 @@ General Process for Implementing UI
 
 public class Main {
     public static void main(String[] args) {
+//        // This Works for some reason, but not the rest
+//        GPT3TurboDataAccessObject chatGPT = new GPT3TurboDataAccessObject();
+//        System.out.println(chatGPT.getResponse("Hello"));
+
         // Build the main program window, the main panel containing the
         // various cards, and the layout, and stitch them together.
 
@@ -63,14 +65,13 @@ public class Main {
         // Objects That will be used commonly
         GameDataAccessObject gameDataAccessObject = new GameDataAccessObject(new Game());
         ConversationDataAccessObject conversationDataAccessObject = new ConversationDataAccessObject(new ConversationHistory());
-        ChatAPIAccessInterface chatAPIAccessInterface = new DummyChatGPTAPI();
+        ChatAPIAccessInterface chatAPIAccessInterface = new GPT3TurboDataAccessObject();
 
         // View Models
         NewGameViewModel newGameViewModel = new NewGameViewModel(8);
         BeginIntroViewModel beginIntroViewModel = new BeginIntroViewModel();
         KillVillagerViewModel killVillagerViewModel = new KillVillagerViewModel();
         VoteOutViewModel voteOutViewModel = new VoteOutViewModel();
-        VoteOutStoryViewModel voteOutStoryViewModel = new VoteOutStoryViewModel();
 
         // The various View objects. Only one view is visible at a time.
         JPanel views = new JPanel(cardLayout);
@@ -131,7 +132,7 @@ public class Main {
         KillVillagerController killVillagerController = new KillVillagerController(killVillagerInteractor);
 
         return new KillVillagerView(killVillagerViewModel, killVillagerController);
-        
+
     }
 
     private static VoteOutView getVoteOutView(ViewManagerModel viewManagerModel, VoteOutViewModel voteOutViewModel, KillVillagerViewModel killVillagerViewModel, GameDataAccessObject gameDataAccessObject, ConversationDataAccessObject conversationDataAccessObject, ChatAPIAccessInterface chatAPIAccessInterface){

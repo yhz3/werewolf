@@ -38,8 +38,8 @@ public class ConversationDataAccessObject implements ConversationDataAccessInter
         String prompt = "Summarize the following so that it can be used on ChatGPT for context.\n"
                 + conversationToCompress;
         if (conversationToCompress != null) {
-            DummyCompressionChatGPTAPI dummyCompressionChatGPTAPI = new DummyCompressionChatGPTAPI();
-            String compressedConversation = dummyCompressionChatGPTAPI.getResponse(prompt);
+            GPT3TurboDataAccessObject gpt3TurboDataAccessObject = new GPT3TurboDataAccessObject();
+            String compressedConversation = gpt3TurboDataAccessObject.getResponse(prompt);
             conversationHistory.addCompressedConversation(compressedConversation);
         }
         this.promptGenerator = promptGenerator;
