@@ -1,6 +1,10 @@
 package interface_adapter.vote_out;
 
 public class VoteOutState {
+    private String playerToVoteOut;
+    private String error;
+    private String deathStory;
+
     public String getPlayerToVoteOut() {
         return playerToVoteOut;
     }
@@ -16,11 +20,6 @@ public class VoteOutState {
     public void setError(String error) {
         this.error = error;
     }
-
-    private String playerToVoteOut;
-    private String error;
-
-    private String deathStory;
 
     public void setVillagerDeathStory(String villagerDeathStory) {
         this.deathStory = villagerDeathStory;

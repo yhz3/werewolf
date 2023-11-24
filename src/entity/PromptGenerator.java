@@ -29,7 +29,8 @@ public class PromptGenerator {
                 "the story. Hidden in the story, include a misleading hint of who the murderer " +
                 "might be. Do not point out the hint explicitly, it should be buried deep inside like a mystery story.";
         String prompt = conversationHistory.getConversationHistory() + preamble + playerKilled + instruction;
-        conversationHistory.addUserMessage(prompt);
+        // We don't want to add conversationHistory to the conversation history again, so we cannot just add prompt
+        conversationHistory.addUserMessage(preamble + playerKilled + instruction);
         return prompt;
     }
 
@@ -39,7 +40,8 @@ public class PromptGenerator {
                 " at the end. Remember that they are a ";
 
         String prompt = conversationHistory.getConversationHistory() + preamble + playerVotedOut + instruction + playerRole;
-        conversationHistory.addUserMessage(prompt);
+        // We don't want to add conversationHistory to the conversation history again, so we cannot just add prompt
+        conversationHistory.addUserMessage(preamble + playerVotedOut + instruction + playerRole);
         return prompt;
     }
 

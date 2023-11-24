@@ -53,8 +53,9 @@ public class ConversationHistory {
         if (historyLength > 3) {
             StringBuilder messageToCompress = new StringBuilder();
             for (int i = 0; i < historyLength - 1; i++) {
-                messageToCompress.append(history.remove(0));
+                messageToCompress.append(history.get(i));
             }
+            history.subList(0, 3).clear();
             return messageToCompress.toString();
         }
         return null;

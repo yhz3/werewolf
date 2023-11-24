@@ -9,9 +9,9 @@ public class DummyCompressionChatGPTAPI implements ChatAPIAccessInterface {
         String compressed = prompt;
 
         // Check if the prompt is long enough
-        if (prompt.length() >= 20) {
-            compressed = prompt.substring(0, 20);
+        if (prompt.length() >= 100) {
+            compressed = prompt.substring(0, 100);
         }
-        return "Successfully compressed" + compressed;
+        return "Successfully compressed length of: " + compressed.length();
     }
 }

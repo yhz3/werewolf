@@ -93,7 +93,7 @@ public class Main {
         views.add(killVillagerView, killVillagerView.viewName);
 
         // Add the VoteOutView
-        VoteOutView voteOutView = getVoteOutView(viewManagerModel, voteOutViewModel, voteOutStoryViewModel, gameDataAccessObject, conversationDataAccessObject, chatAPIAccessInterface);
+        VoteOutView voteOutView = getVoteOutView(viewManagerModel, voteOutViewModel, killVillagerViewModel, gameDataAccessObject, conversationDataAccessObject, chatAPIAccessInterface);
         views.add(voteOutView, voteOutView.viewName);
 
         viewManagerModel.setActiveView(newGameView.viewName);
@@ -134,8 +134,8 @@ public class Main {
         
     }
 
-    private static VoteOutView getVoteOutView(ViewManagerModel viewManagerModel, VoteOutViewModel voteOutViewModel, VoteOutStoryViewModel voteOutStoryViewModel, GameDataAccessObject gameDataAccessObject, ConversationDataAccessObject conversationDataAccessObject, ChatAPIAccessInterface chatAPIAccessInterface){
-        VoteOutPresenter voteOutPresenter = new VoteOutPresenter(voteOutStoryViewModel, voteOutViewModel, viewManagerModel);
+    private static VoteOutView getVoteOutView(ViewManagerModel viewManagerModel, VoteOutViewModel voteOutViewModel, KillVillagerViewModel killVillagerViewModel, GameDataAccessObject gameDataAccessObject, ConversationDataAccessObject conversationDataAccessObject, ChatAPIAccessInterface chatAPIAccessInterface){
+        VoteOutPresenter voteOutPresenter = new VoteOutPresenter(voteOutViewModel, killVillagerViewModel, viewManagerModel);
         VoteOutInteractor voteOutInteractor = new VoteOutInteractor(conversationDataAccessObject, gameDataAccessObject, chatAPIAccessInterface, voteOutPresenter);
         VoteOutController voteOutController = new VoteOutController(voteOutInteractor);
 
