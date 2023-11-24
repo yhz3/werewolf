@@ -46,5 +46,4 @@ public class PromptGenerator {
     public ConversationHistory getConversationHistory() {
         return conversationHistory;
     }
-
 }

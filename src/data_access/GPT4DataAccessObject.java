@@ -1,14 +1,16 @@
 package data_access;
 
+import use_case.data_access_interface.ChatAPIAccessInterface;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 
-public class GPT4DataAccessObject {
-    public static String chatGPT(String prompt) {
+public class GPT4DataAccessObject implements ChatAPIAccessInterface {
+    public String getResponse(String prompt) {
         String url = "https://api.openai.com/v1/chat/completions";
-        String apiKey = "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";
+        String APIKEY = "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";
         String model = "gpt-3.5-turbo";
 
         try {
