@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -30,6 +31,17 @@ public class ConversationDataAccessObject implements ConversationDataAccessInter
 
     @Override
     public void save(PromptGenerator promptGenerator) {
+        ConversationHistory conversationHistory = promptGenerator.getConversationHistory();
+
+        // Compress old conversation before saving.
+        String conversationToCompress = conversationHistory.getConversationToCompress();
+        String prompt = "Summarize the following so that it can be used on ChatGPT for context.\n"
+                + conversationToCompress;
+        if (conversationToCompress != null) {
+            DummyCompressionChatGPTAPI dummyCompressionChatGPTAPI = new DummyCompressionChatGPTAPI();
+            String compressedConversation = dummyCompressionChatGPTAPI.getResponse(prompt);
+            conversationHistory.addCompressedConversation(compressedConversation);
+        }
         this.promptGenerator = promptGenerator;
     }
 }
