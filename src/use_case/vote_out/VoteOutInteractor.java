@@ -2,6 +2,7 @@ package use_case.vote_out;
 
 import entity.Game;
 import entity.PromptGenerator;
+import entity.Werewolf;
 import use_case.data_access_interface.ChatAPIAccessInterface;
 import use_case.data_access_interface.GameDataAccessInterface;
 import use_case.data_access_interface.ConversationDataAccessInterface;
@@ -33,8 +34,6 @@ public class VoteOutInteractor implements VoteOutInputBoundary {
         String playerVotedOut = voteOutInputData.getPlayerVotedOut();
         // This case is specifically when the name isn't a werewolf nor is it a player, so the name doesn't exist
         if (!(game.getAliveVillagers().containsKey(playerVotedOut) || game.getAliveWerewolves().containsKey(playerVotedOut))) {
-            // TODO: we can make "no such player exists" a constant or something later but not important right now
-            // TODO: see if we can move error to the presenter?
             userPresenter.prepareFailView("No such player exists");
         }
         else {
