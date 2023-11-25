@@ -11,7 +11,7 @@ public class GPT4DataAccessObject implements ChatAPIAccessInterface {
     public String getResponse(String prompt) {
         String url = "https://api.openai.com/v1/chat/completions";
         String APIKEY = "sk-";
-        String model = "gpt-4";
+        String model = "gpt-4-1106-preview";
 
         try {
             URL obj = new URL(url);
@@ -43,6 +43,8 @@ public class GPT4DataAccessObject implements ChatAPIAccessInterface {
             return extractMessageFromJSONResponse(response.toString());
 
         } catch (IOException e) {
+            System.out.println(prompt);
+            System.out.println("Ensure there are no \\n in the prompt");
             throw new RuntimeException(e);
         }
     }

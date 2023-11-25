@@ -21,7 +21,7 @@ public class ConversationHistory {
         StringBuilder output = new StringBuilder();
         for (String message : this.history) {
             output.append(message);
-            output.append("\n\n");
+            output.append(" ");
         }
         return output.toString();
     }
@@ -34,7 +34,7 @@ public class ConversationHistory {
             StringBuilder messageToCompress = new StringBuilder();
             for (int i = 0; i < historyLength - 1; i++) {
                 messageToCompress.append(history.get(i));
-                messageToCompress.append("\n\n");
+                messageToCompress.append(" ");
             }
             history.subList(0, 3).clear();
             return messageToCompress.toString();

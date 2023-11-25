@@ -89,9 +89,10 @@ public class VoteOutView extends JPanel implements ActionListener, PropertyChang
         if (evt.getNewValue() instanceof VoteOutState state) {
             if (state.getError() != null) {
                 JOptionPane.showMessageDialog(this, state.getError());
-            } else { //This else block is temporarily retired. If we want a pop up, add it again.
-                JTextArea textArea = new JTextArea(15, 30); // Set rows and columns to control size
-                textArea.setText(state.getPlayerDeathStory());
+            } else {
+                String story = state.getPlayerDeathStory().replace("\\n", "\n");
+                JTextArea textArea = new JTextArea(15, 30);
+                textArea.setText(story);
                 textArea.setWrapStyleWord(true);
                 textArea.setLineWrap(true);
                 textArea.setCaretPosition(0);

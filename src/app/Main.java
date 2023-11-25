@@ -48,10 +48,6 @@ General Process for Implementing UI
 
 public class Main {
     public static void main(String[] args) {
-//        // This Works for some reason, but not the rest
-//        GPT3TurboDataAccessObject chatGPT = new GPT3TurboDataAccessObject();
-//        System.out.println(chatGPT.getResponse("Hello"));
-
         // Build the main program window, the main panel containing the
         // various cards, and the layout, and stitch them together.
 

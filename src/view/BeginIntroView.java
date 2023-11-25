@@ -54,6 +54,9 @@ public class BeginIntroView extends JPanel implements ActionListener, PropertyCh
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getNewValue() instanceof String state) {
+            // GPT output uses \\n to mean new line.
+            state = state.replace("\\n", "\n");
+
             JTextArea textArea = new JTextArea(15, 30); // Set rows and columns to control size
             textArea.setText(state);
             textArea.setWrapStyleWord(true);
