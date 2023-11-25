@@ -11,11 +11,9 @@ public class KillVillagerInteractor implements KillVillagerInputBoundary{
     private final ConversationDataAccessInterface conversationDataAccessObject;
     private final GameDataAccessInterface gameDataAccessObject;
     private final KillVillagerOutputBoundary killVillagerPresenter;
-    private final PromptGenerator promptGenerator;
     private final ChatAPIAccessInterface gptDataAccessObject;
     // This is named storyDataAccessObject in VotePlayer use case, should probably choose one name or the other for
     // uniformity.
-    private final Game game;
 
     public KillVillagerInteractor(ConversationDataAccessInterface conversationDataAccessObject,
                                   GameDataAccessInterface gameDataAccessObject,
@@ -28,8 +26,6 @@ public class KillVillagerInteractor implements KillVillagerInputBoundary{
         //  being passed in from.
         // Notice how we are getting the prompt generator and game from the killVillagerDataAccessInterface,
         // adhering to the CA Engine.
-        this.promptGenerator = conversationDataAccessObject.getPromptGenerator();
-        this.game = gameDataAccessObject.getGame();
         this.gptDataAccessObject = gptDataAccessObject;
         // TODO: Figure out how to talk to ChatGPT without violating CA, since passing in gptDAO as a parameter means it
         //  is coming in as an input from the controller, which is not supposed to be able to talk to the DAO.
@@ -37,6 +33,11 @@ public class KillVillagerInteractor implements KillVillagerInputBoundary{
 
     @Override
     public void killVillager(KillVillagerInputData killVillagerInputData) {
+        // Game and PromptGenerator objects need to be created at the time of the use case so that the objects are
+        // not null
+        Game game = gameDataAccessObject.getGame();
+        PromptGenerator promptGenerator = conversationDataAccessObject.getPromptGenerator();
+
         // TODO: Edit method so both the game and promptGenerator are saved using their respective data access
         //  interfaces.
         // TODO: Edit

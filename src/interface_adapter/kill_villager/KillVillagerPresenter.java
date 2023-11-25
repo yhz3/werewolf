@@ -27,11 +27,11 @@ public class KillVillagerPresenter implements KillVillagerOutputBoundary {
 
     @Override
     public void prepareSuccessView(KillVillagerOutputData villagerDeathStory) {
+        KillVillagerState killVillagerState = killVillagerViewModel.getState();
+        killVillagerState.setPlayerDeathStory(villagerDeathStory.getVillagerDeathStory());
+        killVillagerViewModel.setState(killVillagerState);
+        killVillagerViewModel.firePropertyChanged();
         // On success, switch to voteVillagerView.
-        VoteOutState voteOutState =voteOutViewModel.getState();
-        voteOutState.setVillagerDeathStory(villagerDeathStory.getVillagerDeathStory());
-        voteOutViewModel.setState(voteOutState);
-        voteOutViewModel.firePropertyChanged();
 
         this.viewManagerModel.setActiveView(voteOutViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();

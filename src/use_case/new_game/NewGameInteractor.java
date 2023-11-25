@@ -35,13 +35,15 @@ public class NewGameInteractor implements NewGameInputBoundary{
             game.addPlayer(werewolf);
             PlayerNames.remove(name);
         }
-        for (int i = 0; i < PlayerNames.size(); i++){
-            String name = PlayerNames.get(i);
+        int numVillagers = PlayerNames.size();
+        for (int i = 0; i < numVillagers; i++){
+            String name = PlayerNames.get(0);
             Villager villager = new Villager(name);
             game.addPlayer(villager);
             PlayerNames.remove(name);
         }
         gameData.save(game);
-        userPresenter.prepareSuccessView();
+        NewGameOutputData newGameOutputData = new NewGameOutputData(game);
+        userPresenter.prepareSuccessView(newGameOutputData);
     }
 }

@@ -1,4 +1,8 @@
 package entity;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import entity.Player;
 
@@ -81,5 +85,18 @@ public class Game {
 
     public String[] getWerewolfNames() {
         return this.aliveWerewolves.keySet().toArray(new String[0]);
+    }
+
+    public String[] getPlayerNames() {
+        // Get list of names as ArrayLists
+        ArrayList<String> villagerNames = new ArrayList<>(Arrays.asList(this.getVillagerNames()));
+        ArrayList<String> werewolfNames = new ArrayList<>(Arrays.asList(this.getWerewolfNames()));
+
+        // Add the werewolfNames to villagerNames and sort
+        villagerNames.addAll(werewolfNames);
+        Collections.sort(villagerNames);
+
+        // Return as a String[]
+        return villagerNames.toArray(new String[0]);
     }
 }

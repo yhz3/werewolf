@@ -13,11 +13,11 @@ public class PromptGenerator {
     public String generateIntroPrompt(String[] players, String[] werewolves) {
         String preamble = "I am playing a game of Werewolf (aka Mafia) with my friends. I want you to be the narrator " +
                 "of the game. There are werewolves and villagers, and here is the list of players and werewolves. " +
-                "Players who are not werewolves are villagers.\n";
-        String instruction = "\nCome up with a setting, and give a creative intro for me to read out to the players. " +
+                "Players who are not werewolves are villagers. ";
+        String instruction = " Come up with a setting, and give a creative intro for me to read out to the players. " +
                 "In the intro, describe the players' character. Do not reveal the players' identities. No one has " +
                 "been killed yet.";
-        String prompt =  preamble + "Players: " + Arrays.toString(players) + "\n" + "Werewolves: " +
+        String prompt =  preamble + "Players: " + Arrays.toString(players) + " Werewolves: " +
                 Arrays.toString(werewolves) + instruction;
         conversationHistory.addUserMessage(prompt);
         return prompt;
@@ -29,7 +29,8 @@ public class PromptGenerator {
                 "the story. Hidden in the story, include a misleading hint of who the murderer " +
                 "might be. Do not point out the hint explicitly, it should be buried deep inside like a mystery story.";
         String prompt = conversationHistory.getConversationHistory() + preamble + playerKilled + instruction;
-        conversationHistory.addUserMessage(prompt);
+        // We don't want to add conversationHistory to the conversation history again, so we cannot just add prompt
+        conversationHistory.addUserMessage(preamble + playerKilled + instruction);
         return prompt;
     }
 
@@ -39,7 +40,8 @@ public class PromptGenerator {
                 " at the end. Remember that they are a ";
 
         String prompt = conversationHistory.getConversationHistory() + preamble + playerVotedOut + instruction + playerRole;
-        conversationHistory.addUserMessage(prompt);
+        // We don't want to add conversationHistory to the conversation history again, so we cannot just add prompt
+        conversationHistory.addUserMessage(preamble + playerVotedOut + instruction + playerRole);
         return prompt;
     }
 

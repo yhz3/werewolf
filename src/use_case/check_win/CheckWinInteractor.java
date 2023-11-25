@@ -4,17 +4,17 @@ import entity.Game;
 import use_case.data_access_interface.GameDataAccessInterface;
 
 public class CheckWinInteractor implements CheckWinInputBoundary{
-
-    private Game game;
+    private final GameDataAccessInterface gameDataAccessObject;
 
     private final CheckWinOutputBoundary userPresenter;
 
-    public CheckWinInteractor(GameDataAccessInterface gameData, CheckWinOutputBoundary userPresenter){
+    public CheckWinInteractor(GameDataAccessInterface gameDataAccessObject, CheckWinOutputBoundary userPresenter){
+        this.gameDataAccessObject = gameDataAccessObject;
         this.userPresenter = userPresenter;
-        this.game = gameData.getGame();
     }
 
     public void execute(){
+        Game game = gameDataAccessObject.getGame();
         if (game.checkGameOver()){
             if (game.checkVillagerWin()){
                 userPresenter.prepareVillagerWinView();

@@ -10,8 +10,8 @@ import java.net.URL;
 public class GPT3TurboDataAccessObject implements ChatAPIAccessInterface {
     public String getResponse(String prompt) {
         String url = "https://api.openai.com/v1/chat/completions";
-        String APIKEY = "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";
-        String model = "gpt-3.5-turbo";
+        String APIKEY = "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";
+        String model = "gpt-3.5-turbo-1106";
 
         try {
             URL obj = new URL(url);
@@ -43,6 +43,8 @@ public class GPT3TurboDataAccessObject implements ChatAPIAccessInterface {
             return extractMessageFromJSONResponse(response.toString());
 
         } catch (IOException e) {
+            System.out.println(prompt);
+            System.out.println("Ensure there are no \\n in the prompt");
             throw new RuntimeException(e);
         }
     }

@@ -1,38 +1,32 @@
 package interface_adapter.vote_out;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.kill_villager.KillVillagerViewModel;
 import use_case.vote_out.VoteOutOutputBoundary;
 import use_case.vote_out.VoteOutOutputData;
 
 public class VoteOutPresenter implements VoteOutOutputBoundary {
 
-    private final VoteOutStoryViewModel voteOutStoryViewModel;
     private final VoteOutViewModel voteOutViewModel;
-    private ViewManagerModel viewManagerModel;
+    private final KillVillagerViewModel killVillagerViewModel;
+    private final ViewManagerModel viewManagerModel;
 
 
-    public VoteOutPresenter(VoteOutStoryViewModel voteOutStoryViewModel, VoteOutViewModel voteOutViewModel) {
-        this.voteOutStoryViewModel = voteOutStoryViewModel;
+    public VoteOutPresenter(VoteOutViewModel voteOutViewModel, KillVillagerViewModel killVillagerViewModel, ViewManagerModel viewManagerModel) {
+        this.killVillagerViewModel = killVillagerViewModel;
         this.voteOutViewModel = voteOutViewModel;
+        this.viewManagerModel = viewManagerModel;
     }
 
     @Override
-    public void prepareSuccessView(VoteOutOutputData player) {
-        // Get attributes from output data
-        String playerVotedOut = player.getPlayerVotedOut();
-        String playerRole = player.getPlayerRole();
-        String story = player.getStory();
-        // Get the current state from the view model
-        VoteOutStoryState voteOutStoryState = voteOutStoryViewModel.getState();
-        // Change state's attributes
-        voteOutStoryState.setPlayerVotedOut(playerVotedOut);
-        voteOutStoryState.setPlayerRole(playerRole);
-        voteOutStoryState.setStory(story);
-        // Set the state in the view model again to update it
-        voteOutStoryViewModel.setState(voteOutStoryState);
-        // Set a new view
-        this.viewManagerModel.setActiveView(voteOutStoryViewModel.getViewName());
-        // indicate that we have changed the view
+    public void prepareSuccessView(VoteOutOutputData voteOutOutputData) {
+        VoteOutState voteOutState = voteOutViewModel.getState();
+        voteOutState.setVillagerDeathStory(voteOutOutputData.getStory());
+        voteOutViewModel.setState(voteOutState);
+        voteOutViewModel.firePropertyChanged();
+
+        // On success, switch to KillVillagerView
+        this.viewManagerModel.setActiveView(killVillagerViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
 

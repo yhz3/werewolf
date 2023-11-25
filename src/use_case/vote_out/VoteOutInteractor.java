@@ -11,8 +11,6 @@ public class VoteOutInteractor implements VoteOutInputBoundary {
     private final GameDataAccessInterface gameDataAccessObject;
     private final ChatAPIAccessInterface gptDataAccessObject;
     private final VoteOutOutputBoundary userPresenter;
-    private final Game game;
-    private final PromptGenerator promptGenerator;
 
 
     public VoteOutInteractor(ConversationDataAccessInterface conversationDataAccessObject, GameDataAccessInterface gameDataAccessObject, ChatAPIAccessInterface gptDataAccessObject, VoteOutOutputBoundary userPresenter) {
@@ -20,16 +18,17 @@ public class VoteOutInteractor implements VoteOutInputBoundary {
         this.gameDataAccessObject = gameDataAccessObject;
         this.gptDataAccessObject = gptDataAccessObject;
         this.userPresenter = userPresenter;
-        // Get the game
-        game = gameDataAccessObject.getGame();
-        // Get the prompt generator
-        promptGenerator = conversationDataAccessObject.getPromptGenerator();
     }
 
     // This method prepares success view if a werewolf or villager is voted out
     // Meanwhile, if an incorrect username is entered (it doesn't exist) the fail view is prepared
     @Override
     public void voteOutPlayer(VoteOutInputData voteOutInputData) {
+        // Get the game
+        Game game = gameDataAccessObject.getGame();
+        // Get the prompt generator
+        PromptGenerator promptGenerator = conversationDataAccessObject.getPromptGenerator();
+
         // Get name of player voted out from input data
         String playerVotedOut = voteOutInputData.getPlayerVotedOut();
         // This case is specifically when the name isn't a werewolf nor is it a player, so the name doesn't exist
