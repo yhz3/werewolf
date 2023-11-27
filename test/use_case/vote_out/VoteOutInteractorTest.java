@@ -19,8 +19,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class VoteOutInteractorTest {
 
-    private VoteOutInteractor interactor;
-
     @Test
     void successTest() {
         // TEST CASE: Werewolf is voted out, 2 villagers remain, villagers win.
