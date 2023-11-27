@@ -112,9 +112,15 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getNewValue() instanceof NewGameState state) {
-            String message = "Villagers: " + Arrays.toString(state.getVillagers()) +
-                    "\nWerewolves: " + Arrays.toString(state.getWerewolves());
-            JOptionPane.showMessageDialog(this, message);
+            if (state.getError() != null) {
+                JOptionPane.showMessageDialog(this, state.getError());
+                // We need to set the error to null or the popup will keep showing, this caused bugs in the past
+                state.setError(null);
+            } else {
+                String message = "Villagers: " + Arrays.toString(state.getVillagers()) +
+                        "\nWerewolves: " + Arrays.toString(state.getWerewolves());
+                JOptionPane.showMessageDialog(this, message);
+            }
         }
     }
 }

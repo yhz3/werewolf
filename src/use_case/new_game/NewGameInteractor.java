@@ -26,24 +26,26 @@ public class NewGameInteractor implements NewGameInputBoundary{
         ArrayList<String> PlayerNames = newGameInputData.getUserNames();
         Set<String> checkDuplicates = new HashSet<String>(PlayerNames);
         if (PlayerNames.size() < 4 || checkDuplicates.size() != PlayerNames.size()){
-            userPresenter.prepareFailView();
+            userPresenter.prepareFailView("You must have at least four players, and no duplicate names.");
         }
-        int numWerewolves = PlayerNames.size() / 3;
-        for (int i = 0; i < numWerewolves; i++){
-            String name = PlayerNames.get(random.nextInt(PlayerNames.size()));
-            Werewolf werewolf = new Werewolf(name);
-            game.addPlayer(werewolf);
-            PlayerNames.remove(name);
+        else {
+            int numWerewolves = PlayerNames.size() / 3;
+            for (int i = 0; i < numWerewolves; i++){
+                String name = PlayerNames.get(random.nextInt(PlayerNames.size()));
+                Werewolf werewolf = new Werewolf(name);
+                game.addPlayer(werewolf);
+                PlayerNames.remove(name);
+            }
+            int numVillagers = PlayerNames.size();
+            for (int i = 0; i < numVillagers; i++){
+                String name = PlayerNames.get(0);
+                Villager villager = new Villager(name);
+                game.addPlayer(villager);
+                PlayerNames.remove(name);
+            }
+            gameData.save(game);
+            NewGameOutputData newGameOutputData = new NewGameOutputData(game);
+            userPresenter.prepareSuccessView(newGameOutputData);
         }
-        int numVillagers = PlayerNames.size();
-        for (int i = 0; i < numVillagers; i++){
-            String name = PlayerNames.get(0);
-            Villager villager = new Villager(name);
-            game.addPlayer(villager);
-            PlayerNames.remove(name);
-        }
-        gameData.save(game);
-        NewGameOutputData newGameOutputData = new NewGameOutputData(game);
-        userPresenter.prepareSuccessView(newGameOutputData);
     }
 }
