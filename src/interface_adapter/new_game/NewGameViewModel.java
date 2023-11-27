@@ -13,7 +13,7 @@ public class NewGameViewModel extends ViewModel {
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    public NewGameViewModel(int numberOfPlayers){
+    public NewGameViewModel(int numberOfPlayers) {
         super("new game");
         PLAYER_LABELS = new String[numberOfPlayers];
         for (int i = 0; i < numberOfPlayers; i++) {

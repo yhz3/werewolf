@@ -9,6 +9,7 @@ public class NewGameState {
     private final String[] players;
     private String[] werewolves;
     private String[] villagers;
+    private String error;
 
 
     public NewGameState(int numberOfPlayers) {
@@ -44,5 +45,13 @@ public class NewGameState {
 
     public String[] getWerewolves() {
         return werewolves;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public String getError() {
+        return this.error;
     }
 }

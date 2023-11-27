@@ -112,9 +112,13 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getNewValue() instanceof NewGameState state) {
-            String message = "Villagers: " + Arrays.toString(state.getVillagers()) +
-                    "\nWerewolves: " + Arrays.toString(state.getWerewolves());
-            JOptionPane.showMessageDialog(this, message);
+            if (state.getError() != null) {
+                JOptionPane.showMessageDialog(this, state.getError());
+            } else {
+                String message = "Villagers: " + Arrays.toString(state.getVillagers()) +
+                        "\nWerewolves: " + Arrays.toString(state.getWerewolves());
+                JOptionPane.showMessageDialog(this, message);
+            }
         }
     }
 }
