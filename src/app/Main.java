@@ -61,7 +61,7 @@ public class Main {
         // Objects That will be used commonly
         GameDataAccessObject gameDataAccessObject = new GameDataAccessObject(new Game());
         ConversationDataAccessObject conversationDataAccessObject = new ConversationDataAccessObject(new ConversationHistory());
-        ChatAPIAccessInterface chatAPIAccessInterface = new GPT3TurboDataAccessObject();
+        ChatAPIAccessInterface chatAPIAccessInterface = new DummyChatGPTAPI();
 
         // View Models
         NewGameViewModel newGameViewModel = new NewGameViewModel(8);
