@@ -89,6 +89,7 @@ public class VoteOutView extends JPanel implements ActionListener, PropertyChang
         if (evt.getNewValue() instanceof VoteOutState state) {
             if (state.getError() != null) {
                 JOptionPane.showMessageDialog(this, state.getError());
+                state.setError(null);
             } else {
                 String story = state.getPlayerDeathStory().replace("\\n", "\n");
                 JTextArea textArea = new JTextArea(15, 30);

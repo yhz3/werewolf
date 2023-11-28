@@ -18,7 +18,11 @@ public class NewGamePresenter implements NewGameOutputBoundary {
         this.viewManagerModel = viewManagerModel;
     }
 
-    public void prepareFailView(){}
+    public void prepareFailView(String error) {
+        NewGameState newGameState = newGameViewModel.getState();
+        newGameState.setError(error);
+        newGameViewModel.firePropertyChanged();
+    }
     public void prepareSuccessView(NewGameOutputData newGameOutputData){
         newGameViewModel.getState().setVillagers(newGameOutputData.getVillagers());
         newGameViewModel.getState().setWerewolves(newGameOutputData.getWerewolves());
