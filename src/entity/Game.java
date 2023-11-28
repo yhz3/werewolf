@@ -76,7 +76,7 @@ public class Game {
     }
 
     public boolean checkVillagerWin() {
-        return aliveVillagers.isEmpty();
+        return aliveWerewolves.isEmpty();
     }
 
     public String[] getVillagerNames() {
