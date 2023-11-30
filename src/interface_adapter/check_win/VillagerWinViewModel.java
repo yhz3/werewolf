@@ -7,7 +7,7 @@ import java.beans.PropertyChangeSupport;
 
 public class VillagerWinViewModel extends ViewModel {
 
-    public static final String TITLE_LABEL = "Villager have won!";
+    public static final String TITLE_LABEL = "Villagers have won!";
 
     public static final String BUTTON_LABEL = "End Game";
 

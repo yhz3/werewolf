@@ -60,7 +60,7 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
                             for (int i = 0; i < playerInputFields.length; i++) {
                                 String player = currentState.getPlayer(i);
                                 if (player != null) {
-                                    players.add(player);
+                                    players.add(player.trim());
                                 }
                             }
                             newGameController.execute(players);
