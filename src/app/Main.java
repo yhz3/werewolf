@@ -7,6 +7,7 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.begin_intro.BeginIntroController;
 import interface_adapter.begin_intro.BeginIntroPresenter;
 import interface_adapter.begin_intro.BeginIntroViewModel;
+import interface_adapter.check_win.*;
 import interface_adapter.kill_villager.KillVillagerController;
 import interface_adapter.kill_villager.KillVillagerPresenter;
 import interface_adapter.kill_villager.KillVillagerViewModel;
@@ -18,6 +19,8 @@ import interface_adapter.vote_out.VoteOutPresenter;
 import interface_adapter.vote_out.VoteOutStoryViewModel;
 import interface_adapter.vote_out.VoteOutViewModel;
 import use_case.begin_intro.BeginIntroInteractor;
+import use_case.check_win.CheckWinInteractor;
+import use_case.check_win.WerewolfWinOutputData;
 import use_case.data_access_interface.ChatAPIAccessInterface;
 import use_case.kill_villager.KillVillagerInteractor;
 import use_case.new_game.NewGameInteractor;
@@ -68,6 +71,8 @@ public class Main {
         BeginIntroViewModel beginIntroViewModel = new BeginIntroViewModel();
         KillVillagerViewModel killVillagerViewModel = new KillVillagerViewModel();
         VoteOutViewModel voteOutViewModel = new VoteOutViewModel();
+        VillagerWinViewModel villagerWinViewModel = new VillagerWinViewModel();
+        WerewolfWinViewModel werewolfWinViewModel = new WerewolfWinViewModel();
 
         // The various View objects. Only one view is visible at a time.
         JPanel views = new JPanel(cardLayout);
@@ -85,12 +90,24 @@ public class Main {
         BeginIntroView beginIntroView = getIntroView(viewManagerModel, beginIntroViewModel, killVillagerViewModel, gameDataAccessObject, conversationDataAccessObject, chatAPIAccessInterface);
         views.add(beginIntroView, beginIntroView.viewName);
 
+        // Add the CheckWinView
+        CheckWinView checkWinView = getCheckWinView(viewManagerModel, villagerWinViewModel, werewolfWinViewModel, gameDataAccessObject, conversationDataAccessObject, chatAPIAccessInterface, voteOutViewModel, killVillagerViewModel);
+        views.add(checkWinView, checkWinView.viewName);
+
+        // Add the VillagerWinView
+        VillagerWinView villagerWinView = getVillagerWinView(viewManagerModel, villagerWinViewModel, werewolfWinViewModel, gameDataAccessObject, conversationDataAccessObject, chatAPIAccessInterface, voteOutViewModel, killVillagerViewModel);
+        views.add(villagerWinView, villagerWinView.viewName);
+
+        // Add the WerewolfWinView
+        WerewolfWinView werewolfWinView = getWerewolfWinView(viewManagerModel, villagerWinViewModel, werewolfWinViewModel, gameDataAccessObject, conversationDataAccessObject, chatAPIAccessInterface, voteOutViewModel, killVillagerViewModel);
+        views.add(werewolfWinView, werewolfWinView.viewName);
+
         // Add the KillPlayerView
-        KillVillagerView killVillagerView = getKillVillagerView(viewManagerModel, killVillagerViewModel, voteOutViewModel, gameDataAccessObject, conversationDataAccessObject, chatAPIAccessInterface);
+        KillVillagerView killVillagerView = getKillVillagerView(viewManagerModel, killVillagerViewModel, voteOutViewModel, gameDataAccessObject, conversationDataAccessObject, chatAPIAccessInterface, villagerWinViewModel, werewolfWinViewModel);
         views.add(killVillagerView, killVillagerView.viewName);
 
         // Add the VoteOutView
-        VoteOutView voteOutView = getVoteOutView(viewManagerModel, voteOutViewModel, killVillagerViewModel, gameDataAccessObject, conversationDataAccessObject, chatAPIAccessInterface);
+        VoteOutView voteOutView = getVoteOutView(viewManagerModel, voteOutViewModel, killVillagerViewModel, gameDataAccessObject, conversationDataAccessObject, chatAPIAccessInterface, villagerWinViewModel, werewolfWinViewModel);
         views.add(voteOutView, voteOutView.viewName);
 
         viewManagerModel.setActiveView(newGameView.viewName);
@@ -121,20 +138,49 @@ public class Main {
         return new BeginIntroView(beginIntroViewModel, beginIntroController);
     }
 
+    private static CheckWinView getCheckWinView(ViewManagerModel viewMangerModel, VillagerWinViewModel villagerWinViewModel, WerewolfWinViewModel werewolfWinViewModel, GameDataAccessObject gameDataAccessObject, ConversationDataAccessObject conversationDataAccessObject, ChatAPIAccessInterface chatAPIAccessInterface, VoteOutViewModel voteOutViewModel, KillVillagerViewModel killVillagerViewModel){
+        CheckWinPresenter checkWinPresenter = new CheckWinPresenter(villagerWinViewModel, werewolfWinViewModel, viewMangerModel, gameDataAccessObject, voteOutViewModel, killVillagerViewModel);
+        CheckWinInteractor checkWinInteractor = new CheckWinInteractor(gameDataAccessObject, checkWinPresenter, conversationDataAccessObject, chatAPIAccessInterface);
+        CheckWinController checkWinController = new CheckWinController(checkWinInteractor);
+
+        return new CheckWinView(checkWinController, villagerWinViewModel, werewolfWinViewModel);
+    }
+
+    private static VillagerWinView getVillagerWinView(ViewManagerModel viewManagerModel, VillagerWinViewModel villagerWinViewModel, WerewolfWinViewModel werewolfWinViewModel, GameDataAccessObject gameDataAccessObject, ConversationDataAccessObject conversationDataAccessObject, ChatAPIAccessInterface chatAPIAccessInterface, VoteOutViewModel voteOutViewModel, KillVillagerViewModel killVillagerViewModel){
+        CheckWinPresenter checkWinPresenter = new CheckWinPresenter(villagerWinViewModel, werewolfWinViewModel, viewManagerModel, gameDataAccessObject, voteOutViewModel, killVillagerViewModel);
+        CheckWinInteractor checkWinInteractor = new CheckWinInteractor(gameDataAccessObject, checkWinPresenter, conversationDataAccessObject, chatAPIAccessInterface);
+        CheckWinController checkWinController = new CheckWinController(checkWinInteractor);
+
+        return new VillagerWinView(villagerWinViewModel, checkWinController);
+    }
+
+    private static WerewolfWinView getWerewolfWinView(ViewManagerModel viewManagerModel, VillagerWinViewModel villagerWinViewModel, WerewolfWinViewModel werewolfWinViewModel, GameDataAccessObject gameDataAccessObject, ConversationDataAccessObject conversationDataAccessObject, ChatAPIAccessInterface chatAPIAccessInterface, VoteOutViewModel voteOutViewModel, KillVillagerViewModel killVillagerViewModel){
+        CheckWinPresenter checkWinPresenter = new CheckWinPresenter(villagerWinViewModel, werewolfWinViewModel, viewManagerModel, gameDataAccessObject, voteOutViewModel, killVillagerViewModel);
+        CheckWinInteractor checkWinInteractor = new CheckWinInteractor(gameDataAccessObject, checkWinPresenter, conversationDataAccessObject, chatAPIAccessInterface);
+        CheckWinController checkWinController = new CheckWinController(checkWinInteractor);
+
+        return new WerewolfWinView(werewolfWinViewModel, checkWinController);
+    }
+
+
     // Dirty Code that Stitches together use KillVillagerView with VoteOutPlayerViewModel
-    private static KillVillagerView getKillVillagerView(ViewManagerModel viewManagerModel, KillVillagerViewModel killVillagerViewModel, VoteOutViewModel voteOutViewModel, GameDataAccessObject gameDataAccessObject, ConversationDataAccessObject conversationDataAccessObject, ChatAPIAccessInterface chatAPIAccessInterface) {
+    private static KillVillagerView getKillVillagerView(ViewManagerModel viewManagerModel, KillVillagerViewModel killVillagerViewModel, VoteOutViewModel voteOutViewModel, GameDataAccessObject gameDataAccessObject, ConversationDataAccessObject conversationDataAccessObject, ChatAPIAccessInterface chatAPIAccessInterface, VillagerWinViewModel villagerWinViewModel, WerewolfWinViewModel werewolfWinViewModel) {
         KillVillagerPresenter killVillagerPresenter = new KillVillagerPresenter(killVillagerViewModel, voteOutViewModel, viewManagerModel);
+        CheckWinPresenter checkWinPresenter = new CheckWinPresenter(villagerWinViewModel, werewolfWinViewModel, viewManagerModel, gameDataAccessObject, voteOutViewModel, killVillagerViewModel);
         KillVillagerInteractor killVillagerInteractor = new KillVillagerInteractor(conversationDataAccessObject, gameDataAccessObject, killVillagerPresenter, chatAPIAccessInterface);
-        KillVillagerController killVillagerController = new KillVillagerController(killVillagerInteractor);
+        CheckWinInteractor checkWinInteractor = new CheckWinInteractor(gameDataAccessObject, checkWinPresenter, conversationDataAccessObject, chatAPIAccessInterface);
+        KillVillagerController killVillagerController = new KillVillagerController(checkWinInteractor, killVillagerInteractor);
 
         return new KillVillagerView(killVillagerViewModel, killVillagerController);
 
     }
 
-    private static VoteOutView getVoteOutView(ViewManagerModel viewManagerModel, VoteOutViewModel voteOutViewModel, KillVillagerViewModel killVillagerViewModel, GameDataAccessObject gameDataAccessObject, ConversationDataAccessObject conversationDataAccessObject, ChatAPIAccessInterface chatAPIAccessInterface){
+    private static VoteOutView getVoteOutView(ViewManagerModel viewManagerModel, VoteOutViewModel voteOutViewModel, KillVillagerViewModel killVillagerViewModel, GameDataAccessObject gameDataAccessObject, ConversationDataAccessObject conversationDataAccessObject, ChatAPIAccessInterface chatAPIAccessInterface, VillagerWinViewModel villagerWinViewModel, WerewolfWinViewModel werewolfWinViewModel){
         VoteOutPresenter voteOutPresenter = new VoteOutPresenter(voteOutViewModel, killVillagerViewModel, viewManagerModel);
+        CheckWinPresenter checkWinPresenter = new CheckWinPresenter(villagerWinViewModel, werewolfWinViewModel, viewManagerModel, gameDataAccessObject, voteOutViewModel, killVillagerViewModel);
         VoteOutInteractor voteOutInteractor = new VoteOutInteractor(conversationDataAccessObject, gameDataAccessObject, chatAPIAccessInterface, voteOutPresenter);
-        VoteOutController voteOutController = new VoteOutController(voteOutInteractor);
+        CheckWinInteractor checkWinInteractor = new CheckWinInteractor(gameDataAccessObject, checkWinPresenter, conversationDataAccessObject, chatAPIAccessInterface);
+        VoteOutController voteOutController = new VoteOutController(checkWinInteractor, voteOutInteractor);
 
         return new VoteOutView(voteOutViewModel, voteOutController);
     }
