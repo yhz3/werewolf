@@ -16,7 +16,7 @@ public class RevealRoleInteractor implements RevealRoleInputBoundary{
 
     private final RevealRoleOutputBoundary userPresenter;
 
-    // This will have a bug since the game is retrieved too early. Not fixing for now since we are not using this.
+    // NOTE: This has a bug since the game is retrieved too early. Not fixing for now since we are not using this use case
     public RevealRoleInteractor(GameDataAccessInterface gameData, RevealRoleOutputBoundary userPresenter){
         this.game = gameData.getGame();
         this.villagers = game.getAliveVillagers();

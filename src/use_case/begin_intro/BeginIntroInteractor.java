@@ -28,6 +28,7 @@ public class BeginIntroInteractor implements BeginIntroInputBoundary {
 
     @Override
     public void execute(BeginIntroInputData beginIntroInputData) {
+        // TODO: Remove input data from this use case since there isn't any or decide to keep it in case we wanted to add some?
         // Reconstruct the game from the database
         Game game = this.gameDataAccessObject.getGame();
 

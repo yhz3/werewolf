@@ -13,8 +13,8 @@ public class NewGameController {
         this.newGameInteractor = newGameInteractor;
     }
 
-    public void execute(ArrayList<String> PlayerNames){
-        NewGameInputData newGameInputData = new NewGameInputData(PlayerNames);
+    public void execute(ArrayList<String> playerNames){
+        NewGameInputData newGameInputData = new NewGameInputData(playerNames);
         newGameInteractor.execute(newGameInputData);
     }
 }

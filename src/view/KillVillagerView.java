@@ -90,6 +90,7 @@ public class KillVillagerView extends JPanel implements ActionListener, Property
         if (evt.getNewValue() instanceof KillVillagerState state) {
             if (state.getError() != null) {
                 JOptionPane.showMessageDialog(this, state.getError());
+                state.setError(null);
             } else {
                 // GPT output uses \\n to mean new line.
                 String story = state.getPlayerDeathStory().replace("\\n", "\n");
