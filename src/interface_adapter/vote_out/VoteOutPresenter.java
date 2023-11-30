@@ -26,8 +26,8 @@ public class VoteOutPresenter implements VoteOutOutputBoundary {
         voteOutViewModel.firePropertyChanged();
 
         // On success, switch to KillVillagerView
-        this.viewManagerModel.setActiveView(killVillagerViewModel.getViewName());
-        this.viewManagerModel.firePropertyChanged();
+        // this.viewManagerModel.setActiveView(killVillagerViewModel.getViewName());
+        // this.viewManagerModel.firePropertyChanged();
     }
 
     @Override

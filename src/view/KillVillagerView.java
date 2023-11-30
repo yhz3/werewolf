@@ -1,5 +1,8 @@
 package view;
 
+import interface_adapter.check_win.CheckWinState;
+import interface_adapter.check_win.VillagerWinState;
+import interface_adapter.check_win.WerewolfWinState;
 import interface_adapter.kill_villager.KillVillagerController;
 import interface_adapter.kill_villager.KillVillagerState;
 import interface_adapter.kill_villager.KillVillagerViewModel;

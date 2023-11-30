@@ -33,8 +33,8 @@ public class KillVillagerPresenter implements KillVillagerOutputBoundary {
         killVillagerViewModel.firePropertyChanged();
         // On success, switch to voteVillagerView.
 
-        this.viewManagerModel.setActiveView(voteOutViewModel.getViewName());
-        this.viewManagerModel.firePropertyChanged();
+        // this.viewManagerModel.setActiveView(voteOutViewModel.getViewName());
+        // this.viewManagerModel.firePropertyChanged();
     }
 
     @Override

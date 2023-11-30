@@ -1,5 +1,7 @@
 package view;
 
+import interface_adapter.check_win.VillagerWinState;
+import interface_adapter.check_win.WerewolfWinState;
 import interface_adapter.kill_villager.KillVillagerState;
 import interface_adapter.kill_villager.KillVillagerViewModel;
 import interface_adapter.vote_out.VoteOutController;
@@ -103,5 +105,4 @@ public class VoteOutView extends JPanel implements ActionListener, PropertyChang
             }
         }
     }
-
 }
