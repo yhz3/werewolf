@@ -7,6 +7,7 @@ import interface_adapter.kill_villager.KillVillagerViewModel;
 import interface_adapter.vote_out.VoteOutState;
 import interface_adapter.vote_out.VoteOutViewModel;
 import use_case.check_win.CheckWinOutputBoundary;
+import use_case.check_win.CheckWinOutputData;
 import use_case.check_win.VillagerWinOutputData;
 import use_case.check_win.WerewolfWinOutputData;
 import use_case.data_access_interface.GameDataAccessInterface;
@@ -19,29 +20,24 @@ public class CheckWinPresenter implements CheckWinOutputBoundary {
 
     private final ViewManagerModel viewManagerModel;
 
-    private final GameDataAccessInterface gameDataAccessObject;
-
     private final KillVillagerViewModel killVillagerViewModel;
 
     private final VoteOutViewModel voteOutViewModel;
 
-    public CheckWinPresenter(VillagerWinViewModel villagerWinViewModel, WerewolfWinViewModel werewolfWinViewModel, ViewManagerModel viewManagerModel, GameDataAccessInterface gameDataAccessObject, VoteOutViewModel voteOutViewModel, KillVillagerViewModel killVillagerViewModel){
+    public CheckWinPresenter(VillagerWinViewModel villagerWinViewModel, WerewolfWinViewModel werewolfWinViewModel, ViewManagerModel viewManagerModel, VoteOutViewModel voteOutViewModel, KillVillagerViewModel killVillagerViewModel){
         this.villagerWinViewModel = villagerWinViewModel;
         this.werewolfWinViewModel = werewolfWinViewModel;
         this.viewManagerModel = viewManagerModel;
-        this.gameDataAccessObject = gameDataAccessObject;
         this.killVillagerViewModel = killVillagerViewModel;
         this.voteOutViewModel = voteOutViewModel;
     }
 
-    public void prepareGameContinuesView(){
-        Game game = gameDataAccessObject.getGame();
-        if (game.isDay()){
-            // this.viewManagerModel.setActiveView(killVillagerViewModel.getViewName());
+    public void prepareGameContinuesView(CheckWinOutputData checkWinOutputData) {
+        boolean day = checkWinOutputData.getDay();
+        if (day) {
             this.viewManagerModel.setActiveView(voteOutViewModel.getViewName());
             this.viewManagerModel.firePropertyChanged();
         } else {
-            // this.viewManagerModel.setActiveView(voteOutViewModel.getViewName());
             this.viewManagerModel.setActiveView(killVillagerViewModel.getViewName());
             this.viewManagerModel.firePropertyChanged();
         }
