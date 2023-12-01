@@ -3,7 +3,6 @@ package view;
 import interface_adapter.new_game.NewGameController;
 import interface_adapter.new_game.NewGameState;
 import interface_adapter.new_game.NewGameViewModel;
-import use_case.begin_intro.BeginIntroInputData;
 
 import javax.swing.*;
 import java.awt.*;
