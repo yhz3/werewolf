@@ -2,7 +2,6 @@ package view;
 
 import interface_adapter.begin_intro.BeginIntroController;
 import interface_adapter.begin_intro.BeginIntroViewModel;
-import use_case.begin_intro.BeginIntroInputData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Arrays;
 
 public class BeginIntroView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "intro";
@@ -31,7 +29,7 @@ public class BeginIntroView extends JPanel implements ActionListener, PropertyCh
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(beginIntro)) {
-                            beginIntroController.execute(new BeginIntroInputData());
+                            beginIntroController.execute();
                         }
                     }
                 }

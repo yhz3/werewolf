@@ -27,8 +27,7 @@ public class BeginIntroInteractor implements BeginIntroInputBoundary {
     }
 
     @Override
-    public void execute(BeginIntroInputData beginIntroInputData) {
-        // TODO: Remove input data from this use case since there isn't any or decide to keep it in case we wanted to add some?
+    public void execute() {
         // Reconstruct the game from the database
         Game game = this.gameDataAccessObject.getGame();
 
@@ -42,8 +41,6 @@ public class BeginIntroInteractor implements BeginIntroInputBoundary {
         // Save Game and PromptGenerator Data
         this.gameDataAccessObject.save(game);
         this.conversationDataAccessObject.save(this.promptGenerator);
-
-
 
         BeginIntroOutputData beginIntroOutputData = new BeginIntroOutputData(introStory, villagers);
         this.beginIntroPresenter.prepareSuccessView(beginIntroOutputData);

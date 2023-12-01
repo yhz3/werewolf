@@ -5,14 +5,6 @@ import entity.PromptGenerator;
 import use_case.data_access_interface.ChatAPIAccessInterface;
 import use_case.data_access_interface.ConversationDataAccessInterface;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 public class ConversationDataAccessObject implements ConversationDataAccessInterface {
 
     // We are calling it the ConversationDataAccessObject because we originally only wanted the DAO to save

@@ -10,8 +10,8 @@ public class RevealRoleController {
         this.revealRoleInteractor = revealRoleInteractor;
     }
 
-    public void execute(String userName){
-        RevealRoleInputData inputData = new RevealRoleInputData(userName);
+    public void execute(String playerName){
+        RevealRoleInputData inputData = new RevealRoleInputData(playerName);
         revealRoleInteractor.execute(inputData);
     }
 }

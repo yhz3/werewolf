@@ -1,6 +1,7 @@
 package entity;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class PromptGenerator {
     private final ConversationHistory conversationHistory;
@@ -40,6 +41,24 @@ public class PromptGenerator {
         String prompt = conversationHistory.getConversationHistory() + " User: " + preamble + playerVotedOut + instruction + playerRole;
         // We don't want to add conversationHistory to the conversation history again, so we cannot just add prompt
         conversationHistory.addUserMessage(preamble + playerVotedOut + instruction + playerRole);
+        return prompt;
+    }
+
+    public String generateVillagerWinPrompt(HashMap<String, Player> players){
+        String playerString = players.keySet().toString();
+        String preamble = "The villagers have won the game: ";
+        String instruction = ". Finish the story by describing how the villagers celebrate their win.";
+        String prompt = conversationHistory.getConversationHistory() + preamble + playerString + instruction;
+        conversationHistory.addUserMessage(preamble +  playerString + instruction);
+        return prompt;
+    }
+
+    public String generateWerewolfWinPrompt(HashMap<String, Player> werewolves){
+        String werewolfString = werewolves.keySet().toString();
+        String preamble = "The werewolves have won the game: ";
+        String instruction = ". Finish the story by describing how the werewolves celebrate their win.";
+        String prompt = conversationHistory.getConversationHistory() + preamble + werewolfString + instruction;
+        conversationHistory.addUserMessage(preamble +  werewolfString + instruction);
         return prompt;
     }
 
