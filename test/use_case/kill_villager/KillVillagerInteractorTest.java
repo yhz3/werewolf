@@ -27,12 +27,13 @@ class KillVillagerInteractorTest {
 
     @BeforeEach
     void init() {
-        conversationDataAccessInterface = new ConversationDataAccessObject(new ConversationHistory());
         Game game = new Game();
         Villager villager = new Villager("Player1");
         game.addPlayer(villager);
         gameDataAccessInterface = new GameDataAccessObject(game);
         gptDataAccessObject = new DummyChatGPTAPI();
+        conversationDataAccessInterface = new ConversationDataAccessObject(new ConversationHistory(),
+                gptDataAccessObject);
     }
 
     @Test

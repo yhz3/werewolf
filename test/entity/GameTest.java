@@ -64,10 +64,12 @@ class GameTest {
 
     @Test
     void checkVillagerWin() {
-        assertFalse(game.checkWerewolfWin());
+        assertFalse(game.checkVillagerWin());
+        assertFalse(game.checkGameOver());
         game.killPlayer("Eren");
         game.killPlayer("Mikasa");
-        assertTrue(game.checkWerewolfWin());
+        assertFalse(game.checkVillagerWin());
+        assertTrue(game.checkGameOver());
     }
 
     @Test

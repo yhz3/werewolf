@@ -19,7 +19,7 @@ class PromptGeneratorTest {
 
     @Test
     void generateIntroPrompt() {
-        String str = promptGenerator.generateIntroPrompt(new String[]{"Carm"}, new String[] {"Richie"});
+        String str = promptGenerator.generateIntroPrompt(new String[]{"Carm, Richie"});
         assertTrue(str.contains("Carm") && str.contains("Richie"));
         Integer after = promptGenerator.getConversationHistory().getConversationHistory().length();
         assertTrue(before < after);

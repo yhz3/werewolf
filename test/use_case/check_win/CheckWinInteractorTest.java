@@ -1,6 +1,9 @@
 package use_case.check_win;
 
+import data_access.ConversationDataAccessObject;
+import data_access.DummyChatGPTAPI;
 import data_access.GameDataAccessObject;
+import entity.ConversationHistory;
 import entity.Game;
 import entity.Villager;
 import entity.Werewolf;
@@ -32,20 +35,23 @@ class CheckWinInteractorTest {
         gameDataAccessObject = new GameDataAccessObject(game);
         checkWinPresenter = new CheckWinOutputBoundary() {
             @Override
-            public void prepareGameContinuesView() {
+            public void prepareGameContinuesView(CheckWinOutputData checkWinOutputData) {
                 fail("Game should not continue.");
             }
 
             @Override
-            public void prepareVillagerWinView() {
+            public void prepareVillagerWinView(VillagerWinOutputData villagerWinOutputData) {
+
             }
 
             @Override
-            public void prepareWerewolfWinView() {
+            public void prepareWerewolfWinView(WerewolfWinOutputData werewolfWinOutputData) {
                 fail("Werewolves should not win.");
             }
         };
-        CheckWinInteractor checkWinInteractor = new CheckWinInteractor(gameDataAccessObject, checkWinPresenter);
+        CheckWinInteractor checkWinInteractor = new CheckWinInteractor(gameDataAccessObject, checkWinPresenter,
+                new ConversationDataAccessObject(new ConversationHistory(), new DummyChatGPTAPI()),
+                new DummyChatGPTAPI());
         checkWinInteractor.execute();
     }
 
@@ -56,20 +62,22 @@ class CheckWinInteractorTest {
         gameDataAccessObject = new GameDataAccessObject(game);
         checkWinPresenter = new CheckWinOutputBoundary() {
             @Override
-            public void prepareGameContinuesView() {
+            public void prepareGameContinuesView(CheckWinOutputData checkWinOutputData) {
                 fail("Game should not continue.");
             }
 
             @Override
-            public void prepareVillagerWinView() {
+            public void prepareVillagerWinView(VillagerWinOutputData villagerWinOutputData) {
                 fail("Villagers should not win.");
             }
 
             @Override
-            public void prepareWerewolfWinView() {
+            public void prepareWerewolfWinView(WerewolfWinOutputData werewolfWinOutputData) {
             }
         };
-        CheckWinInteractor checkWinInteractor = new CheckWinInteractor(gameDataAccessObject, checkWinPresenter);
+        CheckWinInteractor checkWinInteractor = new CheckWinInteractor(gameDataAccessObject, checkWinPresenter,
+                new ConversationDataAccessObject(new ConversationHistory(), new DummyChatGPTAPI()),
+                new DummyChatGPTAPI());
         checkWinInteractor.execute();
     }
 
@@ -82,20 +90,22 @@ class CheckWinInteractorTest {
         gameDataAccessObject = new GameDataAccessObject(game);
         checkWinPresenter = new CheckWinOutputBoundary() {
             @Override
-            public void prepareGameContinuesView() {
+            public void prepareGameContinuesView(CheckWinOutputData checkWinOutputData) {
             }
 
             @Override
-            public void prepareVillagerWinView() {
+            public void prepareVillagerWinView(VillagerWinOutputData villagerWinOutputData) {
                 fail("Villagers should not win.");
             }
 
             @Override
-            public void prepareWerewolfWinView() {
+            public void prepareWerewolfWinView(WerewolfWinOutputData werewolfWinOutputData) {
                 fail("Werewolves should not win.");
             }
         };
-        CheckWinInteractor checkWinInteractor = new CheckWinInteractor(gameDataAccessObject, checkWinPresenter);
+        CheckWinInteractor checkWinInteractor = new CheckWinInteractor(gameDataAccessObject, checkWinPresenter,
+                new ConversationDataAccessObject(new ConversationHistory(), new DummyChatGPTAPI()),
+                new DummyChatGPTAPI());
         checkWinInteractor.execute();
     }
 }
