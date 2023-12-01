@@ -51,7 +51,6 @@ public class GPT4DataAccessObject implements ChatAPIAccessInterface {
 
     public static String extractMessageFromJSONResponse(String response) {
         int start = response.indexOf("        \"content\": ") + 20;
-
         int end = response.indexOf("      },", start) - 1;
 
         String output = response.substring(start, end);

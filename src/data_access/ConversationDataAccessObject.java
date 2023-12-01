@@ -30,7 +30,7 @@ public class ConversationDataAccessObject implements ConversationDataAccessInter
 
         // Compress old conversation before saving.
         String conversationToCompress = conversationHistory.getConversationToCompress();
-        String prompt = "Summarize the following conversation between the User and ChatGPT so that it can be used for context: "
+        String prompt = "Summarize the following conversation between the User and ChatGPT: "
                 + conversationToCompress;
         if (conversationToCompress != null) {
             String compressedConversation = compressionAPI.getResponse(prompt);
