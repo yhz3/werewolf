@@ -49,6 +49,14 @@ public class Game {
         }
     }
 
+    public void clearAll() {
+        this.aliveVillagers.clear();
+        this.deadVillagers.clear();
+        this.aliveWerewolves.clear();
+        this.deadWerewolves.clear();
+        this.day = false;
+    }
+
     public boolean isDay() {
         return day;
     }
