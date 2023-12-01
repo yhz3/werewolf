@@ -1,13 +1,8 @@
 package view;
 
-import interface_adapter.check_win.CheckWinState;
-import interface_adapter.check_win.VillagerWinState;
-import interface_adapter.check_win.WerewolfWinState;
 import interface_adapter.kill_villager.KillVillagerController;
 import interface_adapter.kill_villager.KillVillagerState;
 import interface_adapter.kill_villager.KillVillagerViewModel;
-import interface_adapter.new_game.NewGameState;
-import interface_adapter.new_game.NewGameViewModel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -16,7 +11,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Arrays;
 
 public class KillVillagerView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "kill villager";
