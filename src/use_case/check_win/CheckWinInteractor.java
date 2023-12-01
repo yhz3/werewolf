@@ -44,7 +44,8 @@ public class CheckWinInteractor implements CheckWinInputBoundary{
                 userPresenter.prepareWerewolfWinView(output);
             }
         } else {
-            userPresenter.prepareGameContinuesView();
+            CheckWinOutputData output = new CheckWinOutputData(game.isDay());
+            userPresenter.prepareGameContinuesView(output);
         }
     }
 }

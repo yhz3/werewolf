@@ -139,7 +139,7 @@ public class Main {
     }
 
     private static CheckWinView getCheckWinView(ViewManagerModel viewMangerModel, VillagerWinViewModel villagerWinViewModel, WerewolfWinViewModel werewolfWinViewModel, GameDataAccessObject gameDataAccessObject, ConversationDataAccessObject conversationDataAccessObject, ChatAPIAccessInterface chatAPIAccessInterface, VoteOutViewModel voteOutViewModel, KillVillagerViewModel killVillagerViewModel){
-        CheckWinPresenter checkWinPresenter = new CheckWinPresenter(villagerWinViewModel, werewolfWinViewModel, viewMangerModel, gameDataAccessObject, voteOutViewModel, killVillagerViewModel);
+        CheckWinPresenter checkWinPresenter = new CheckWinPresenter(villagerWinViewModel, werewolfWinViewModel, viewMangerModel, voteOutViewModel, killVillagerViewModel);
         CheckWinInteractor checkWinInteractor = new CheckWinInteractor(gameDataAccessObject, checkWinPresenter, conversationDataAccessObject, chatAPIAccessInterface);
         CheckWinController checkWinController = new CheckWinController(checkWinInteractor);
 
@@ -147,7 +147,7 @@ public class Main {
     }
 
     private static VillagerWinView getVillagerWinView(ViewManagerModel viewManagerModel, VillagerWinViewModel villagerWinViewModel, WerewolfWinViewModel werewolfWinViewModel, GameDataAccessObject gameDataAccessObject, ConversationDataAccessObject conversationDataAccessObject, ChatAPIAccessInterface chatAPIAccessInterface, VoteOutViewModel voteOutViewModel, KillVillagerViewModel killVillagerViewModel){
-        CheckWinPresenter checkWinPresenter = new CheckWinPresenter(villagerWinViewModel, werewolfWinViewModel, viewManagerModel, gameDataAccessObject, voteOutViewModel, killVillagerViewModel);
+        CheckWinPresenter checkWinPresenter = new CheckWinPresenter(villagerWinViewModel, werewolfWinViewModel, viewManagerModel, voteOutViewModel, killVillagerViewModel);
         CheckWinInteractor checkWinInteractor = new CheckWinInteractor(gameDataAccessObject, checkWinPresenter, conversationDataAccessObject, chatAPIAccessInterface);
         CheckWinController checkWinController = new CheckWinController(checkWinInteractor);
 
@@ -155,7 +155,7 @@ public class Main {
     }
 
     private static WerewolfWinView getWerewolfWinView(ViewManagerModel viewManagerModel, VillagerWinViewModel villagerWinViewModel, WerewolfWinViewModel werewolfWinViewModel, GameDataAccessObject gameDataAccessObject, ConversationDataAccessObject conversationDataAccessObject, ChatAPIAccessInterface chatAPIAccessInterface, VoteOutViewModel voteOutViewModel, KillVillagerViewModel killVillagerViewModel){
-        CheckWinPresenter checkWinPresenter = new CheckWinPresenter(villagerWinViewModel, werewolfWinViewModel, viewManagerModel, gameDataAccessObject, voteOutViewModel, killVillagerViewModel);
+        CheckWinPresenter checkWinPresenter = new CheckWinPresenter(villagerWinViewModel, werewolfWinViewModel, viewManagerModel, voteOutViewModel, killVillagerViewModel);
         CheckWinInteractor checkWinInteractor = new CheckWinInteractor(gameDataAccessObject, checkWinPresenter, conversationDataAccessObject, chatAPIAccessInterface);
         CheckWinController checkWinController = new CheckWinController(checkWinInteractor);
 
@@ -166,7 +166,7 @@ public class Main {
     // Dirty Code that Stitches together use KillVillagerView with VoteOutPlayerViewModel
     private static KillVillagerView getKillVillagerView(ViewManagerModel viewManagerModel, KillVillagerViewModel killVillagerViewModel, VoteOutViewModel voteOutViewModel, GameDataAccessObject gameDataAccessObject, ConversationDataAccessObject conversationDataAccessObject, ChatAPIAccessInterface chatAPIAccessInterface, VillagerWinViewModel villagerWinViewModel, WerewolfWinViewModel werewolfWinViewModel) {
         KillVillagerPresenter killVillagerPresenter = new KillVillagerPresenter(killVillagerViewModel, voteOutViewModel, viewManagerModel);
-        CheckWinPresenter checkWinPresenter = new CheckWinPresenter(villagerWinViewModel, werewolfWinViewModel, viewManagerModel, gameDataAccessObject, voteOutViewModel, killVillagerViewModel);
+        CheckWinPresenter checkWinPresenter = new CheckWinPresenter(villagerWinViewModel, werewolfWinViewModel, viewManagerModel, voteOutViewModel, killVillagerViewModel);
         KillVillagerInteractor killVillagerInteractor = new KillVillagerInteractor(conversationDataAccessObject, gameDataAccessObject, killVillagerPresenter, chatAPIAccessInterface);
         CheckWinInteractor checkWinInteractor = new CheckWinInteractor(gameDataAccessObject, checkWinPresenter, conversationDataAccessObject, chatAPIAccessInterface);
         KillVillagerController killVillagerController = new KillVillagerController(checkWinInteractor, killVillagerInteractor);
@@ -177,7 +177,7 @@ public class Main {
 
     private static VoteOutView getVoteOutView(ViewManagerModel viewManagerModel, VoteOutViewModel voteOutViewModel, KillVillagerViewModel killVillagerViewModel, GameDataAccessObject gameDataAccessObject, ConversationDataAccessObject conversationDataAccessObject, ChatAPIAccessInterface chatAPIAccessInterface, VillagerWinViewModel villagerWinViewModel, WerewolfWinViewModel werewolfWinViewModel){
         VoteOutPresenter voteOutPresenter = new VoteOutPresenter(voteOutViewModel, killVillagerViewModel, viewManagerModel);
-        CheckWinPresenter checkWinPresenter = new CheckWinPresenter(villagerWinViewModel, werewolfWinViewModel, viewManagerModel, gameDataAccessObject, voteOutViewModel, killVillagerViewModel);
+        CheckWinPresenter checkWinPresenter = new CheckWinPresenter(villagerWinViewModel, werewolfWinViewModel, viewManagerModel, voteOutViewModel, killVillagerViewModel);
         VoteOutInteractor voteOutInteractor = new VoteOutInteractor(conversationDataAccessObject, gameDataAccessObject, chatAPIAccessInterface, voteOutPresenter);
         CheckWinInteractor checkWinInteractor = new CheckWinInteractor(gameDataAccessObject, checkWinPresenter, conversationDataAccessObject, chatAPIAccessInterface);
         VoteOutController voteOutController = new VoteOutController(checkWinInteractor, voteOutInteractor);

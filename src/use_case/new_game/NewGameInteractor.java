@@ -21,10 +21,11 @@ public class NewGameInteractor implements NewGameInputBoundary{
     }
 
     public void execute(NewGameInputData newGameInputData){
+        Random random = new Random();
         ArrayList<String> playerNames = newGameInputData.getUserNames();
         Set<String> checkDuplicates = new HashSet<String>(playerNames);
         if (playerNames.size() < 4 || checkDuplicates.size() != playerNames.size()){
-            userPresenter.prepareFailView("You must have at least four players, and no duplicate names.");
+            userPresenter.prepareFailView("You must have at least four players, no duplicate names, and no blank names.");
         }
         else {
             // Make a player factory
