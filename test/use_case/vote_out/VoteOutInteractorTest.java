@@ -61,6 +61,10 @@ class VoteOutInteractorTest {
                 // Check that the conversation history is larger now; hence, a story was generated
                 assertTrue(conversationObject.getPromptGenerator().getConversationHistory().
                         getConversationHistory().length() > conversationHistorySize);
+                // Check if the correct role was passed into Output Data
+                assertEquals(player.getPlayerRole(), "werewolf");
+                // Check if a story is input.
+                assertFalse(player.getStory().isEmpty());
             }
 
             @Override
