@@ -26,7 +26,7 @@ public class NewGameInteractor implements NewGameInputBoundary{
         ArrayList<String> PlayerNames = newGameInputData.getUserNames();
         Set<String> checkDuplicates = new HashSet<String>(PlayerNames);
         if (PlayerNames.size() < 4 || checkDuplicates.size() != PlayerNames.size()){
-            userPresenter.prepareFailView("You must have at least four players, and no duplicate names.");
+            userPresenter.prepareFailView("You must have at least four players, no duplicate names, and no blank names.");
         }
         else {
             int numWerewolves = PlayerNames.size() / 3;

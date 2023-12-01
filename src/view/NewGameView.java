@@ -59,8 +59,21 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
                             ArrayList<String> players = new ArrayList<String>();
                             for (int i = 0; i < playerInputFields.length; i++) {
                                 String player = currentState.getPlayer(i);
+                                // Not allowing blank names needs to be sorted out here, not the interactor
+                                // Otherwise we have to loop through a list to find blank names, very redundant
+                                /* .isBlank() checks  checks if a string contains no characters,
+                                    is only whitespace, and is null.*/
+                                // First I need to check that the player is not null, or I can't strip it
                                 if (player != null) {
-                                    players.add(player);
+                                    // Strip the string (removes trailing/leading whitespaces)
+                                    player = player.strip();
+                                    // Remove backspace characters (important!)
+                                    player = player.replaceAll("\b", "");
+                                    // Now I make sure the player isn't a blank name
+                                    // Whether it's a duplicate will be checked in the interactor
+                                    if (!player.isBlank()) {
+                                        players.add(player);
+                                    }
                                 }
                             }
                             newGameController.execute(players);
