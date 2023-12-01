@@ -45,4 +45,8 @@ public class ConversationHistory {
     public void addCompressedConversation(String compressedConversation) {
         history.add(0, compressedConversation);
     }
+
+    public void clearConversationHistory() {
+        this.history.clear();
+    }
 }
