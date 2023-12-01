@@ -2,15 +2,8 @@ package data_access;
 
 import entity.ConversationHistory;
 import entity.PromptGenerator;
+import use_case.data_access_interface.ChatAPIAccessInterface;
 import use_case.data_access_interface.ConversationDataAccessInterface;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class ConversationDataAccessObject implements ConversationDataAccessInterface {
 
@@ -19,10 +12,12 @@ public class ConversationDataAccessObject implements ConversationDataAccessInter
     // the name without refactoring other code because we have bigger issues to deal with for now.
     // We recognize that this is contributing to the technical debt of the project.
     private PromptGenerator promptGenerator;
+    private ChatAPIAccessInterface compressionAPI;
     // Not making this method final so that the save() works.
 
-    public ConversationDataAccessObject(ConversationHistory conversationHistory) {
+    public ConversationDataAccessObject(ConversationHistory conversationHistory, ChatAPIAccessInterface compressionAPI) {
         this.promptGenerator = new PromptGenerator(conversationHistory);
+        this.compressionAPI = compressionAPI;
     }
 
     public PromptGenerator getPromptGenerator() {
@@ -35,13 +30,10 @@ public class ConversationDataAccessObject implements ConversationDataAccessInter
 
         // Compress old conversation before saving.
         String conversationToCompress = conversationHistory.getConversationToCompress();
-        String prompt = "Summarize the following so that it can be used on ChatGPT for context: "
+        String prompt = "Summarize the following conversation between the User and ChatGPT: "
                 + conversationToCompress;
         if (conversationToCompress != null) {
-            // GPT3TurboDataAccessObject gpt3TurboDataAccessObject = new GPT3TurboDataAccessObject();
-            DummyChatGPTAPI dummyChatGPTAPI = new DummyChatGPTAPI();
-            //String compressedConversation = gpt3TurboDataAccessObject.getResponse(prompt);
-            String compressedConversation = dummyChatGPTAPI.getResponse(prompt);
+            String compressedConversation = compressionAPI.getResponse(prompt);
             conversationHistory.addCompressedConversation(compressedConversation);
         }
         this.promptGenerator = promptGenerator;

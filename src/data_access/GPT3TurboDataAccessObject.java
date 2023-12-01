@@ -10,7 +10,7 @@ import java.net.URL;
 public class GPT3TurboDataAccessObject implements ChatAPIAccessInterface {
     public String getResponse(String prompt) {
         String url = "https://api.openai.com/v1/chat/completions";
-        String APIKEY = "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";
+        String APIKEY = "sk-";
         String model = "gpt-3.5-turbo-1106";
 
         try {
@@ -50,11 +50,17 @@ public class GPT3TurboDataAccessObject implements ChatAPIAccessInterface {
     }
 
     public static String extractMessageFromJSONResponse(String response) {
-        int start = response.indexOf("content")+ 11;
+        int start = response.indexOf("        \"content\": ") + 20;
+        int end = response.indexOf("      },", start) - 1;
 
-        int end = response.indexOf("\"", start);
+        String output = response.substring(start, end);
 
-        return response.substring(start, end);
+        // Replace things that will cause issues in json parsing
+        output = output.replace("\\n", " ");
+        output = output.replace("\"", "");
+        output = output.replace("\\", "");
+
+        return output;
 
     }
 }

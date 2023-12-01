@@ -31,7 +31,7 @@ public class BeginIntroInteractor implements BeginIntroInputBoundary {
         // Reconstruct the game from the database
         Game game = this.gameDataAccessObject.getGame();
 
-        String prompt = this.promptGenerator.generateIntroPrompt(game.getVillagerNames(), game.getWerewolfNames());
+        String prompt = this.promptGenerator.generateIntroPrompt(game.getPlayerNames());
         String introStory = this.gptDataAccessObject.getResponse(prompt);
         String[] villagers = game.getVillagerNames();
 

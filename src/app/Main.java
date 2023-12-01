@@ -1,13 +1,18 @@
 package app;
 
-import data_access.*;
+import data_access.ConversationDataAccessObject;
+import data_access.GPT3TurboDataAccessObject;
+import data_access.GameDataAccessObject;
 import entity.ConversationHistory;
 import entity.Game;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.begin_intro.BeginIntroController;
 import interface_adapter.begin_intro.BeginIntroPresenter;
 import interface_adapter.begin_intro.BeginIntroViewModel;
-import interface_adapter.check_win.*;
+import interface_adapter.check_win.CheckWinController;
+import interface_adapter.check_win.CheckWinPresenter;
+import interface_adapter.check_win.VillagerWinViewModel;
+import interface_adapter.check_win.WerewolfWinViewModel;
 import interface_adapter.kill_villager.KillVillagerController;
 import interface_adapter.kill_villager.KillVillagerPresenter;
 import interface_adapter.kill_villager.KillVillagerViewModel;
@@ -63,8 +68,10 @@ public class Main {
 
         // Objects That will be used commonly
         GameDataAccessObject gameDataAccessObject = new GameDataAccessObject(new Game());
-        ConversationDataAccessObject conversationDataAccessObject = new ConversationDataAccessObject(new ConversationHistory());
-        ChatAPIAccessInterface chatAPIAccessInterface = new DummyChatGPTAPI();
+        ChatAPIAccessInterface compressionAPI = new GPT3TurboDataAccessObject();
+        ChatAPIAccessInterface chatAPIAccessInterface = new GPT3TurboDataAccessObject();
+        ConversationDataAccessObject conversationDataAccessObject = new ConversationDataAccessObject(new ConversationHistory(), compressionAPI);
+
 
         // View Models
         NewGameViewModel newGameViewModel = new NewGameViewModel(8);

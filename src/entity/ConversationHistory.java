@@ -10,7 +10,7 @@ public class ConversationHistory {
     }
 
     public void addGPTMessage(String message) {
-        this.history.add("AI: " + message);
+        this.history.add("ChatGPT: " + message);
     }
 
     public void addUserMessage(String message) {
