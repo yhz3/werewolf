@@ -10,10 +10,12 @@ public class ConversationHistory {
     }
 
     public void addGPTMessage(String message) {
-        this.history.add("AI: " + message);
+        System.out.println(message);
+        this.history.add("ChatGPT: " + message);
     }
 
     public void addUserMessage(String message) {
+        System.out.println(message);
         this.history.add("User: " + message);
     }
 

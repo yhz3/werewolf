@@ -2,6 +2,7 @@ package data_access;
 
 import entity.ConversationHistory;
 import entity.PromptGenerator;
+import use_case.data_access_interface.ChatAPIAccessInterface;
 import use_case.data_access_interface.ConversationDataAccessInterface;
 
 import java.io.BufferedReader;
@@ -19,10 +20,12 @@ public class ConversationDataAccessObject implements ConversationDataAccessInter
     // the name without refactoring other code because we have bigger issues to deal with for now.
     // We recognize that this is contributing to the technical debt of the project.
     private PromptGenerator promptGenerator;
+    private ChatAPIAccessInterface compressionAPI;
     // Not making this method final so that the save() works.
 
-    public ConversationDataAccessObject(ConversationHistory conversationHistory) {
+    public ConversationDataAccessObject(ConversationHistory conversationHistory, ChatAPIAccessInterface compressionAPI) {
         this.promptGenerator = new PromptGenerator(conversationHistory);
+        this.compressionAPI = compressionAPI;
     }
 
     public PromptGenerator getPromptGenerator() {
@@ -35,11 +38,10 @@ public class ConversationDataAccessObject implements ConversationDataAccessInter
 
         // Compress old conversation before saving.
         String conversationToCompress = conversationHistory.getConversationToCompress();
-        String prompt = "Summarize the following so that it can be used on ChatGPT for context: "
+        String prompt = "Summarize the following conversation between the User and ChatGPT so that it can be used for context: "
                 + conversationToCompress;
         if (conversationToCompress != null) {
-            DummyChatGPTAPI gpt3TurboDataAccessObject = new DummyChatGPTAPI();
-            String compressedConversation = gpt3TurboDataAccessObject.getResponse(prompt);
+            String compressedConversation = compressionAPI.getResponse(prompt);
             conversationHistory.addCompressedConversation(compressedConversation);
         }
         this.promptGenerator = promptGenerator;
