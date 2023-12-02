@@ -22,13 +22,9 @@ public class KillVillagerInteractor implements KillVillagerInputBoundary{
         this.conversationDataAccessObject = conversationDataAccessObject;
         this.gameDataAccessObject = gameDataAccessObject;
         this.killVillagerPresenter = killVillagerPresenter;
-        // TODO: Figure out how to talk to the Output Boundary without violating CA, i.e. where the output boundary is
-        //  being passed in from.
         // Notice how we are getting the prompt generator and game from the killVillagerDataAccessInterface,
         // adhering to the CA Engine.
         this.gptDataAccessObject = gptDataAccessObject;
-        // TODO: Figure out how to talk to ChatGPT without violating CA, since passing in gptDAO as a parameter means it
-        //  is coming in as an input from the controller, which is not supposed to be able to talk to the DAO.
     }
 
     @Override
@@ -37,10 +33,6 @@ public class KillVillagerInteractor implements KillVillagerInputBoundary{
         // not null
         Game game = gameDataAccessObject.getGame();
         PromptGenerator promptGenerator = conversationDataAccessObject.getPromptGenerator();
-
-        // TODO: Edit method so both the game and promptGenerator are saved using their respective data access
-        //  interfaces.
-        // TODO: Edit
         // Getting the villager name
         String villager = killVillagerInputData.getVillager();
 
