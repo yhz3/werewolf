@@ -143,7 +143,7 @@ public class Main {
         CheckWinPresenter checkWinPresenter = new CheckWinPresenter(villagerWinViewModel, werewolfWinViewModel, viewManagerModel, voteOutViewModel, killVillagerViewModel);
         CheckWinInteractor checkWinInteractor = new CheckWinInteractor(gameDataAccessObject, checkWinPresenter, conversationDataAccessObject, chatAPIAccessInterface);
         RestartGamePresenter restartGamePresenter = new RestartGamePresenter(newGameViewModel, viewManagerModel);
-        RestartGameInteractor restartGameInteractor = new RestartGameInteractor(gameDataAccessObject, restartGamePresenter, conversationDataAccessObject);
+        RestartGameInteractor restartGameInteractor = new RestartGameInteractor(restartGamePresenter);
         CheckWinController checkWinController = new CheckWinController(checkWinInteractor, restartGameInteractor);
 
         return new VillagerWinView(villagerWinViewModel, checkWinController);
@@ -153,7 +153,7 @@ public class Main {
         CheckWinPresenter checkWinPresenter = new CheckWinPresenter(villagerWinViewModel, werewolfWinViewModel, viewManagerModel, voteOutViewModel, killVillagerViewModel);
         CheckWinInteractor checkWinInteractor = new CheckWinInteractor(gameDataAccessObject, checkWinPresenter, conversationDataAccessObject, chatAPIAccessInterface);
         RestartGamePresenter restartGamePresenter = new RestartGamePresenter(newGameViewModel, viewManagerModel);
-        RestartGameInteractor restartGameInteractor = new RestartGameInteractor(gameDataAccessObject, restartGamePresenter, conversationDataAccessObject);
+        RestartGameInteractor restartGameInteractor = new RestartGameInteractor(restartGamePresenter);
         CheckWinController checkWinController = new CheckWinController(checkWinInteractor, restartGameInteractor);
 
         return new WerewolfWinView(werewolfWinViewModel, checkWinController);
@@ -167,7 +167,7 @@ public class Main {
         KillVillagerInteractor killVillagerInteractor = new KillVillagerInteractor(conversationDataAccessObject, gameDataAccessObject, killVillagerPresenter, chatAPIAccessInterface);
         CheckWinInteractor checkWinInteractor = new CheckWinInteractor(gameDataAccessObject, checkWinPresenter, conversationDataAccessObject, chatAPIAccessInterface);
         RestartGamePresenter restartGamePresenter = new RestartGamePresenter(newGameViewModel, viewManagerModel);
-        RestartGameInteractor restartGameInteractor = new RestartGameInteractor(gameDataAccessObject, restartGamePresenter, conversationDataAccessObject);
+        RestartGameInteractor restartGameInteractor = new RestartGameInteractor(restartGamePresenter);
         KillVillagerController killVillagerController = new KillVillagerController(checkWinInteractor, killVillagerInteractor, restartGameInteractor);
 
         return new KillVillagerView(killVillagerViewModel, killVillagerController);
@@ -180,7 +180,7 @@ public class Main {
         VoteOutInteractor voteOutInteractor = new VoteOutInteractor(conversationDataAccessObject, gameDataAccessObject, chatAPIAccessInterface, voteOutPresenter);
         CheckWinInteractor checkWinInteractor = new CheckWinInteractor(gameDataAccessObject, checkWinPresenter, conversationDataAccessObject, chatAPIAccessInterface);
         RestartGamePresenter restartGamePresenter = new RestartGamePresenter(newGameViewModel, viewManagerModel);
-        RestartGameInteractor restartGameInteractor = new RestartGameInteractor(gameDataAccessObject, restartGamePresenter, conversationDataAccessObject);
+        RestartGameInteractor restartGameInteractor = new RestartGameInteractor(restartGamePresenter);
         VoteOutController voteOutController = new VoteOutController(checkWinInteractor, voteOutInteractor, restartGameInteractor);
 
         return new VoteOutView(voteOutViewModel, voteOutController);
