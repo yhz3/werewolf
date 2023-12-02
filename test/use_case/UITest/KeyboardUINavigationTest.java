@@ -1,4 +1,4 @@
-package use_case;
+package use_case.UITest;
 
 import app.Main;
 import org.junit.jupiter.api.Test;
