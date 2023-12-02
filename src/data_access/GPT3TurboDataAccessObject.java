@@ -7,10 +7,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 
-public class GPT3TurboDataAccessObject implements ChatAPIAccessInterface {
+public class  GPT3TurboDataAccessObject implements ChatAPIAccessInterface {
     public String getResponse(String prompt) {
         String url = "https://api.openai.com/v1/chat/completions";
-        String APIKEY = "sk-";
+        String APIKEY = "insert key here";
         String model = "gpt-3.5-turbo-1106";
 
         try {
