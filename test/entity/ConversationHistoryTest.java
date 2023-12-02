@@ -20,7 +20,7 @@ class ConversationHistoryTest {
     void getConversationHistory() {
         conversationHistory.addUserMessage("Who is the GOAT?");
         conversationHistory.addGPTMessage("Jordan > LeMickey.");
-        assertEquals("User: Who is the GOAT? AI: Jordan > LeMickey. ",
+        assertEquals("User: Who is the GOAT? ChatGPT: Jordan > LeMickey. ",
                 conversationHistory.getConversationHistory());
     }
 
@@ -38,7 +38,7 @@ class ConversationHistoryTest {
         conversationHistory.addGPTMessage("Jordan > LeMickey.");
         conversationHistory.addUserMessage("That's wrong.");
         conversationHistory.addGPTMessage("You're wrong.");
-        assertEquals("User: Who is the GOAT? AI: Jordan > LeMickey. User: That's wrong. ",
+        assertEquals("User: Who is the GOAT? ChatGPT: Jordan > LeMickey. User: That's wrong. ",
                 conversationHistory.getConversationToCompress());
     }
 
@@ -46,7 +46,7 @@ class ConversationHistoryTest {
     void addCompressedConversation() {
         conversationHistory.addGPTMessage("You're wrong.");
         conversationHistory.addCompressedConversation("User and AI argue over if Jordan is the GOAT or LeBron.");
-        assertEquals("User and AI argue over if Jordan is the GOAT or LeBron. AI: You're wrong. ",
+        assertEquals("User and AI argue over if Jordan is the GOAT or LeBron. ChatGPT: You're wrong. ",
                 conversationHistory.getConversationHistory());
     }
 }

@@ -35,11 +35,10 @@ class BeginIntroInteractorTest {
         game.addPlayer(villager2);
         game.addPlayer(villager3);
         game.addPlayer(werewolf);
-        // Input data
-        BeginIntroInputData inputData = new BeginIntroInputData();
         // Creating parameters the interactor needs
         ConversationHistory history = new ConversationHistory();
-        ConversationDataAccessInterface conversationObject = new ConversationDataAccessObject(history);
+        ConversationDataAccessInterface conversationObject = new ConversationDataAccessObject(history,
+                new DummyChatGPTAPI());
         GameDataAccessInterface gameObject = new GameDataAccessObject(game);
         ChatAPIAccessInterface chatObject = new DummyChatGPTAPI();
         BeginIntroOutputBoundary successPresenter = new BeginIntroOutputBoundary() {
@@ -58,7 +57,7 @@ class BeginIntroInteractorTest {
         };
 
         BeginIntroInteractor interactor = new BeginIntroInteractor(conversationObject, gameObject, chatObject, successPresenter);
-        interactor.execute(inputData);
+        interactor.execute();
 
     }
 

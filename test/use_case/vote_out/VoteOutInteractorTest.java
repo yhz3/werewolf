@@ -38,9 +38,9 @@ class VoteOutInteractorTest {
         VoteOutInputData inputData = new VoteOutInputData(werewolfName);
         // Creating parameters the interactor needs
         ConversationHistory history = new ConversationHistory();
-        ConversationDataAccessInterface conversationObject = new ConversationDataAccessObject(history);
         GameDataAccessInterface gameObject = new GameDataAccessObject(game);
         ChatAPIAccessInterface chatObject = new DummyChatGPTAPI();
+        ConversationDataAccessInterface conversationObject = new ConversationDataAccessObject(history, chatObject);
         // Getting the size of the conversation history for testing
         int conversationHistorySize = history.getConversationHistory().length();
         // Assertions are done within the "presenter"
@@ -88,9 +88,9 @@ class VoteOutInteractorTest {
         // Input data has a name of a player who doesn't exist (Mariah Carey)
         VoteOutInputData inputData = new VoteOutInputData(playerName);
         ConversationHistory history = new ConversationHistory();
-        ConversationDataAccessInterface conversationObject = new ConversationDataAccessObject(history);
         GameDataAccessInterface gameObject = new GameDataAccessObject(game);
         ChatAPIAccessInterface chatObject = new DummyChatGPTAPI();
+        ConversationDataAccessInterface conversationObject = new ConversationDataAccessObject(history, chatObject);
 
         VoteOutOutputBoundary successPresenter = new VoteOutOutputBoundary() {
             @Override
