@@ -49,4 +49,14 @@ class ConversationHistoryTest {
         assertEquals("User and AI argue over if Jordan is the GOAT or LeBron. ChatGPT: You're wrong. ",
                 conversationHistory.getConversationHistory());
     }
+
+    @Test
+    void clearConversationHistory() {
+        conversationHistory.addUserMessage("Who is the GOAT?");
+        conversationHistory.addGPTMessage("Jordan > LeMickey.");
+        conversationHistory.addUserMessage("That's wrong.");
+        conversationHistory.addGPTMessage("You're wrong.");
+        conversationHistory.clearConversationHistory();
+        assertTrue(conversationHistory.getConversationHistory().isEmpty());
+    }
 }

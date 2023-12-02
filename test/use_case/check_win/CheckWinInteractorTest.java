@@ -41,7 +41,7 @@ class CheckWinInteractorTest {
 
             @Override
             public void prepareVillagerWinView(VillagerWinOutputData villagerWinOutputData) {
-
+                assertFalse(villagerWinOutputData.getVillagerWinStory().isEmpty());
             }
 
             @Override
@@ -73,6 +73,7 @@ class CheckWinInteractorTest {
 
             @Override
             public void prepareWerewolfWinView(WerewolfWinOutputData werewolfWinOutputData) {
+                assertFalse(werewolfWinOutputData.getWerewolfWinStory().isEmpty());
             }
         };
         CheckWinInteractor checkWinInteractor = new CheckWinInteractor(gameDataAccessObject, checkWinPresenter,
@@ -91,6 +92,7 @@ class CheckWinInteractorTest {
         checkWinPresenter = new CheckWinOutputBoundary() {
             @Override
             public void prepareGameContinuesView(CheckWinOutputData checkWinOutputData) {
+                assertFalse(checkWinOutputData.getDay());
             }
 
             @Override
