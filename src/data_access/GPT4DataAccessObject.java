@@ -10,7 +10,7 @@ import java.net.URL;
 public class GPT4DataAccessObject implements ChatAPIAccessInterface {
     public String getResponse(String prompt) {
         String url = "https://api.openai.com/v1/chat/completions";
-        String APIKEY = "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";
+        String APIKEY = "insert key here";
         String model = "gpt-4-1106-preview";
 
         try {

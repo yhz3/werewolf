@@ -26,10 +26,6 @@ public class KeyboardUINavigationTest {
         keyCodes.add(KeyEvent.VK_C);
         keyCodes.add(KeyEvent.VK_D);
 
-        // Navigate to the first text field
-        robot.keyPress(KeyEvent.VK_TAB);
-        robot.keyRelease(KeyEvent.VK_TAB);
-
         for (Integer code: keyCodes) {
             robot.keyPress(code);
             robot.keyRelease(code);
@@ -40,6 +36,8 @@ public class KeyboardUINavigationTest {
             // Simulate Tab key press to navigate
             robot.keyPress(KeyEvent.VK_TAB);
             robot.keyRelease(KeyEvent.VK_TAB);
+
+            robot.delay(1000);
         }
 
         // Navigate to new game button
