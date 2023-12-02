@@ -14,6 +14,8 @@ public class PlayerFactory {
         if (rand <= WEREWOLF_PROBABILITY) {
             return new Werewolf(playerName);
         }
+        // Yes this else if would always be true but I'll leave it in case we add
+        // more complex probability checking or more roles
         else if (rand > WEREWOLF_PROBABILITY){
             return new Villager(playerName);
         }

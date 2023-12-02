@@ -1,8 +1,6 @@
 package app;
 
-import data_access.ConversationDataAccessObject;
-import data_access.GPT3TurboDataAccessObject;
-import data_access.GameDataAccessObject;
+import data_access.*;
 import entity.ConversationHistory;
 import entity.Game;
 import interface_adapter.ViewManagerModel;
@@ -68,8 +66,8 @@ public class Main {
 
         // Objects That will be used commonly
         GameDataAccessObject gameDataAccessObject = new GameDataAccessObject(new Game());
-        ChatAPIAccessInterface compressionAPI = new GPT3TurboDataAccessObject();
-        ChatAPIAccessInterface chatAPIAccessInterface = new GPT3TurboDataAccessObject();
+        ChatAPIAccessInterface compressionAPI = new DummyChatGPTAPI();
+        ChatAPIAccessInterface chatAPIAccessInterface = new DummyCompressionChatGPTAPI();
         ConversationDataAccessObject conversationDataAccessObject = new ConversationDataAccessObject(new ConversationHistory(), compressionAPI);
 
 
