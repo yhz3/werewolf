@@ -1,80 +1,26 @@
-Project Specification for Group #167
+# Werewolf AI Narrative Assistant
 
-USE CASE IDEAS:
-- New game
-  - Input Data: Player names
-  - Create Player Entities (Assign Roles Randomly)
-  - Create Game Object
-  - Add Players to Game
-  - Output Data: Game Object
-- Begin Intro
-  - Input Data: (n/a for now, but might be needed in future to adjust gpt story settings etc.), Game Object
-  - Create PromptGenerator Object using constructor
-  - Call PromptGenerator.generateIntroPrompt
-  - Feed Prompt to ChatAPIAccessInterface
-  - Save GPT Ouput to PromptGenerator
-  - Output Data: GPT Output, Game Object, PromptGeneratorObject
-- Kill player (in night)
-  - Input Data: Player name, Game Object, PromptGeneratorObject
-  - Call PromptGenerator.generatePlayerKilledPrompt
-  - Feed Prompt to ChatAPIAccessInterface
-  - Save GPT Output to PromptGenerator
-  - Check for win condition
-  - Change Game.day to true
-  - Output Data: GPT Output, Game Object, PromptGeneratorObject
-- Vote out player (in day)
-  - Input Data: Player name, Game Object, PromptGeneratorObject
-  - Call PromptGenerator.generatePlayerVotedOutPrompt
-  - Feed Prompt to ChatAPIAccessInterface
-  - Save GPT Output to PromptGenerator
-  - Check for win condition
-  - Change Game.day to false
-  - Output Data: GPT Output, Game Object, PromptGeneratorObject
+## Project Description
+
+### How does Werewolf work?
+The game of Werewolf is a social party game. A minimum of 4 players comes together and each will be randomly assigned the role of werewolf or villager (players can choose to include certain special roles, such as girl or magician). The game alternates between day at night. At night the werewolves come to live and collectively decide which villager they want to „kill“. During the day, it will be revealed, which villager got „killed“ and then all players have to decide on one player they want to vote out. Players will need to come up with creative reasoning on why they should not be the ones to be voted out. The goal of the game is for one group (either villagers or werewolves) to eliminate all the players of the other group. The whole game is organized by a narrator, whose job it is to keep track of players role, let players now when the daytime changes between day and night and to make the game more interesting by coming up with stories to set a scene for the game and explain what happened to players that got „killed“ or voted out.
+
+### Why did we want to create this app?
+The narration of Werewolf is an important part of the game. Players need to be invested in the story to make the game feel real and for it to be more fun. However, we have noticed that when a human comes up with narrations, those usually have a medieval setting and are stale and repetitive. Thus, our goal was to create a game that outputs a novel story each time and allows the game to take place in different settings.
+
+### Why use this application?
+This application was created as an assistant to the narrator of a Werewolf game. The narrator will be able to input the names of the player and the application will randomly assign roles to the players and displaying those on the screen. The game will automatically switch between day and night and provide corresponding views. During the night, the narrator will be able to input the name of the villager that got „killed“ by the werewolves and during the day they will be able to input the name of the player that got voted out. If the player inputted does not exist or is not an alive player anymore, the application will let the narrator know and ask them to input a different name. If a name has been inputted successfully, the game will display an interesting and player-specific story of how the player died. The application will automatically recognize when one of the teams has won and end the game, while displaying a story explaining how the game came to and end. Lastly, the narrator can choose to start a new game, whereas the names of the players are already inputted to allow restarting the game more smoothly.
+
+### Technologies used:
+
+### Features to implement in the future:
 
 
-Team Name: Los Pollos Hermanos
+## How to install and run the project:
 
-Domain: Werewolf Game with AI Narrator
 
-The application will allow people to play a game of Werewolf/Mafia offline. On top of a functional interface for playing Werewolf on one computer, This interface will assist the typical narrator role in the Mafia game. It will take user input and game state data to give prompts to Chat-GPT to narrate the story.
+## How to use the project:
 
-The game of "Werewolf" is a social deduction party game where players are secretly assigned roles by the gamemaster as either werewolves or villagers. Players are secretly assigned roles of whether you are a villager or a werewolf. If there are more than one werewolf, they know who else are werewolves. During the "Night Phase", werewolves covertly choose a player to eliminate while all players' eyes are closed. The gamemaster gives an improvised story to dramatically reveal who was killed. During the "Day Phase", players discuss and debate the identity of the werewolves and vote to eliminate a suspected player. The game alternates between these phases until either all werewolves are eliminated, leading to a villagers' win, or the number of werewolves equals or exceeds the number of villagers, resulting in a werewolf victory. The game thrives on deception, strategy, and intuition.
-
-Software Specification:
-- Allow the gamemaster to choose how many players are in the game.
-- Allow the gamemaster to enter the names of players
-- Randomly select roles for players
-  - 4-5: 1 Werewolf
-  - 6+: 2 Werewolves
-- Allow the user to view their roles discreetly (Villager or Werewolf)
-- Anytime during the game
-- Werewolves are shown the names of the other werewolves
-- Input which player was murdered
-- Reveals role if they are voted out
-- Input which player was voted out
-- Reveals role if they are voted out
-- Display the ChatGPT story for a intro and subsequent rounds when a villager is killed
-- Taking in game state info, names, etc. as inputs
-- Give ChatGPT a fixed theme, background, and location
-- End the game when there are insufficient number of Villages/Werewolves are left
-- Display which team won, and the roles of the players
-
-- Other features (not part of MVP) (In order of priority)
-- Personalize Chat-GPT story
-- Change length and tone of story
-- Add details to Chat-GPT story (location, background, theme etc.)
-
-Improved gameplay
-- More roles (Guardian, seers etc.)
-- Keep track of scores (how many times each user has won)
-- Skip and/or abstain voting
-- Restart game with same players or new players, same or new story background
-- How to play tutorial, and instructions of rules and roles
-- Computer to computer interaction (online)
-- Voting system
-- Voting system for villagers to vote out werewolves
-- Voting system for werewolves to choose a villager to kill
-- Somehow entirely replace need for gamemaster
 
 User Stories:
 Team: I am the gamemaster. Someone in the game forgets their role in the middle of the game. I use the application to reveal their role and show it to them on the screen. The game continues where it left off.
@@ -86,49 +32,4 @@ Daniyaal: I gather five friends to play Werewolf. After the player selection scr
 Kevin: I’m a gamemaster. The werewolves have selected one player to murder. I enter the player who has been murdered. The computer outputs the next part of the story to be displayed based on the events that happened for the gamemaster to read.
 
 Ethan: There is only one werewolf left and the villagers are now deciding who to vote off. After the villagers have all chosen who to vote out, I enter the voted person’s name in. It is revealed they are a werewolf, and since there are no more werewolves, the game ends, indicating the villagers won.
-
-Proposed Entities for the Domain:
-
-Game State
-
-- ArrayList<Werewolf> werewolf_list
-- ArrayList<Villager> villager_list
-- ArrayList<T> last_actions
-- Boolean daytime
-- String context
-
-
-Player
-- bool alive
-- string name
-
-Werewolf (Player)
-- bool alive
-- string name
-
-
-
-Villager (Player)
-- bool alive
-- string name
-
-Scheduled Meeting Times + Mode of Communication:
-- Meeting time outside of lab: Saturdays 3:00pm
-- Mode of Communication: Discord server
-
-Dev Workflow:
-
-Issues (Tasks)
-- i.e. adding a use case
-- describe plan
-
-Pull Request
-- talk about literal code
-- technical plan
-  - files to be edited
-  - concerns 
-  - limitations
-
-Code
-- ensure codebase still runs between commits
 
