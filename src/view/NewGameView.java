@@ -20,12 +20,13 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
     public final String viewName = "new game";
     private final NewGameViewModel newGameViewModel;
     private final JTextField[] playerInputFields;
+    private final NewGameController newGameController;
 
     private final JButton newGame;
 
     public NewGameView(NewGameViewModel newGameViewModel, NewGameController newGameController) {
+        this.newGameController = newGameController;
         playerInputFields = new JTextField[NewGameViewModel.PLAYER_LABELS.length];
-
         for (int i = 0; i < playerInputFields.length; i++) {
             playerInputFields[i] = new JTextField(15);
         }
