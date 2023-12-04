@@ -14,15 +14,24 @@ This application was created as an assistant to the narrator of a Werewolf game.
 ### Technologies used:
 
 ### Features to implement in the future:
+- add special roles, such as Magician or Girl
+- allow users to view their role during the game (make the code more accessible)
+- improve the UI
+- allow users to decide on a setting for the ChatGPT narration and personalize the stories
 
 
 ## How to install and run the project:
 
+Clone the project and open it in an IDE. 
+
 
 ## How to use the project:
 
+While playing a game of Werewolf, use this project as an assistant to the narrator. Before starting, enter the names of all of the players in the first View and click new Game. The application will show the roles assigned to each player, whereas it is the narrators task to let the players know what their roles are. Afterwards, the game will supply a story to begin the game, which has to be read out to the players.
+The game will alternate between day and night. During the night the narrator will have to let the werewolves decide which villager they want to "kill" and enter the selected villagers name into the view. During the day, the narrator will let all players discuss which player to vote out. After a player has been selected, the narrator again will enter the person's name into the view. Everytime a villager is killed or a player is voted out the application will supply a story that has to be read out to the players.
+Once there are no villagers or werewolves left the game will end automatically and show a final story to be read out by the narrator. The narrator can then choose whether to end the application or start a new game.
 
-User Stories:
+### User Stories:
 Team: I am the gamemaster. Someone in the game forgets their role in the middle of the game. I use the application to reveal their role and show it to them on the screen. The game continues where it left off.
 
 Emily: I gathered two of my friends to play werewolf. We open the app and see a screen asking us to enter the number of players. I enter ‘3’ and get a notification, telling me that we do not have enough players. It tells me that we need at least 4 players to play the game.
