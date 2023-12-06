@@ -31,8 +31,9 @@ Clone the project and open it in an IDE. To run this project an OpenAI account n
 
 Note, that using GPT4 is optional, but GPT3 is required, since it is used to compress the conversation history. In the main program, the ChatAPIAccessInterface is automatically set to GPT4DataAccessObject, but may be changed to GPT3TurboDataAccessObject.
 
-`ChatAPIAccessInterface compressionAPI = new GPT3TurboDataAccessObject();
- ChatAPIAccessInterface chatAPIAccessInterface = new GPT4DataAccessObject();`
+`ChatAPIAccessInterface compressionAPI = new GPT3TurboDataAccessObject();`
+
+`ChatAPIAccessInterface chatAPIAccessInterface = new GPT4DataAccessObject();`
 
 Now, the main program can be run.
 
