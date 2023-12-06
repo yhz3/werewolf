@@ -12,6 +12,9 @@ The narration of Werewolf is an important part of the game. Players need to be i
 This application was created as an assistant to the narrator of a Werewolf game. The narrator will be able to input the names of the player and the application will randomly assign roles to the players and displaying those on the screen. The game will automatically switch between day and night and provide corresponding views. During the night, the narrator will be able to input the name of the villager that got „killed“ by the werewolves and during the day they will be able to input the name of the player that got voted out. If the player inputted does not exist or is not an alive player anymore, the application will let the narrator know and ask them to input a different name. If a name has been inputted successfully, the game will display an interesting and player-specific story of how the player died. The application will automatically recognize when one of the teams has won and end the game, while displaying a story explaining how the game came to and end. Lastly, the narrator can choose to start a new game, whereas the names of the players are already inputted to allow restarting the game more smoothly.
 
 ### Technologies used:
+The project uses OpenAI's ChatGPT AI. More specifically, it uses the models gpt-4-1106-preview and gpt-3.5-turbo-1106. That is, during the game we input prompts into GPT4 (or GPT3.5) and have it output a story narrating the game. 
+We need to keep track of the conversation history and feed it back into ChatGPT for the story to be consistent. However, the conversation history quickly becomes lengthy. Thus, we use ChatGPT3.5 everytime a new part of the story is outputted, and prompt it to compress the story by asking it to ouput a summary.
+Compared to GPT3.5, GPT4 gives more advanced and intersting stories, but is very slow. Thus, we have decided to use GPT4 to create the stories and to use GPT3.5 for compression. Currently, the project allows the user to switch to GPT3.5 for narration if the user prefers a faster output over story quality.
 
 ### Features to implement in the future:
 - add special roles, such as Magician or Girl
@@ -22,7 +25,16 @@ This application was created as an assistant to the narrator of a Werewolf game.
 
 ## How to install and run the project:
 
-Clone the project and open it in an IDE. 
+Clone the project and open it in an IDE. To run this project an OpenAI account needs to be created. The API key that OpenAI provides after opening the account should be inserted into the code files GPT3TruboDataAccessObject and GPT4DataAccessObject after 
+
+` String APIKEY = "Insert your key here"`
+
+Note, that using GPT4 is optional, but GPT3 is required, since it is used to compress the conversation history. In the main program, the ChatAPIAccessInterface is automatically set to GPT4DataAccessObject, but may be changed to GPT3TurboDataAccessObject.
+
+`ChatAPIAccessInterface compressionAPI = new GPT3TurboDataAccessObject();
+ ChatAPIAccessInterface chatAPIAccessInterface = new GPT4DataAccessObject();`
+
+Now, the main program can be run.
 
 
 ## How to use the project:
