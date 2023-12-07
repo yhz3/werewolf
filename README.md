@@ -25,6 +25,8 @@ Compared to GPT3.5, GPT4 gives more advanced and intersting stories, but is very
 
 ## How to install and run the project:
 
+Note to graders: If you need an API key, message Daniyaal at daniyaal.farooqi@mail.utoronto.ca
+
 Clone the project and open it in an IDE. To run this project an OpenAI account needs to be created. The API key that OpenAI provides after opening the account should be inserted into the code files GPT3TruboDataAccessObject and GPT4DataAccessObject after 
 
 ` String APIKEY = "Insert your key here"`
